@@ -26,6 +26,7 @@ $Tab:: {
             MouseMove(66, 927, 0)
             Sleep(16)
             Click("Up")
+            Sleep(16)
             ShowClickMark(1164, 1519)
             MouseMove(1164, 1519, 0)
             Click()
