@@ -6,6 +6,7 @@
 
 #Requires AutoHotkey v2.0
 #SingleInstance Force
+CheckUpdate()
 
 LaunchRoute(filepath, *) {
     Run(A_ScriptDir "\" filepath)
@@ -98,3 +99,73 @@ yPos += 38 + 15
 
 myGui.Show("w520 h" yPos)
 myGui.OnEvent("Close", (*) => ExitApp())
+
+CheckUpdate() {
+    static base := "https://cdn.jsdelivr.net/gh/dzhao735-cloud/Genshin-qzd@main/"
+    try {
+        whr := ComObject("WinHttp.WinHttpRequest.5.1")
+        whr.Open("GET", base "version.txt", false)
+        whr.SetTimeouts(5000, 5000, 10000, 10000)
+        whr.Send()
+        remoteVer := Trim(whr.ResponseText)
+    } catch {
+        return
+    }
+    localVerFile := A_ScriptDir "\version.txt"
+    localVer := FileExist(localVerFile) ? Trim(FileRead(localVerFile)) : "0"
+    if (remoteVer = localVer || remoteVer = "")
+        return
+    if MsgBox("发现新版本 v" remoteVer "  （当前 v" localVer "）`n是否立即更新？",
+              "脚本更新", "YesNo Icon?") != "Yes"
+        return
+    try {
+        whr.Open("GET", base "filelist.txt", false)
+        whr.Send()
+        fileList := whr.ResponseText
+    } catch {
+        MsgBox("获取文件列表失败，请检查网络。", "更新失败", "IconX")
+        return
+    }
+    failed := []
+    for rawLine in StrSplit(fileList, "`n") {
+        line := Trim(StrReplace(rawLine, "`r", ""))
+        if (line = "" || SubStr(line, 1, 1) = ";")
+            continue
+        localPath := A_ScriptDir "\" StrReplace(line, "/", "\")
+        SplitPath(localPath,, &dir)
+        if (dir != "" && !FileExist(dir))
+            DirCreate(dir)
+        try {
+            Download(base . EncodeUrl(line), localPath)
+        } catch {
+            failed.Push(line)
+        }
+    }
+    if (failed.Length > 0) {
+        msg := ""
+        for f in failed
+            msg .= f "`n"
+        MsgBox("以下文件下载失败：`n" msg, "部分更新失败", "IconX")
+    } else {
+        MsgBox("✅ 更新完成！将重新启动。", "更新成功", "Icon!")
+        Reload
+    }
+}
+
+EncodeUrl(str) {
+    out := ""
+    Loop Parse str {
+        c := A_LoopField
+        if RegExMatch(c, "[A-Za-z0-9_.~\-/]")
+            out .= c
+        else {
+            buf := Buffer(4)
+            n := DllCall("WideCharToMultiByte", "uint", 65001, "uint", 0,
+                         "wstr", c, "int", 1, "ptr", buf, "int", 4,
+                         "ptr", 0, "ptr", 0, "int")
+            Loop n
+                out .= "%" Format("{:02X}", NumGet(buf, A_Index-1, "UChar"))
+        }
+    }
+    return out
+}
