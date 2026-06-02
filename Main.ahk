@@ -127,7 +127,18 @@ CheckUpdate() {
         MsgBox("获取文件列表失败，请检查网络。", "更新失败", "IconX")
         return
     }
+    
+    ; ===== 新增：统计需要下载的文件总数 =====
+    totalFiles := 0
+    for rawLine in StrSplit(fileList, "`n") {
+        line := Trim(StrReplace(rawLine, "`r", ""))
+        if (line != "" && SubStr(line, 1, 1) != ";" && line != "version.txt")
+            totalFiles++
+    }
+    
     failed := []
+    successCount := 0 ; 新增：成功下载的计数器
+    
     for rawLine in StrSplit(fileList, "`n") {
         line := Trim(StrReplace(rawLine, "`r", ""))
         if (line = "" || SubStr(line, 1, 1) = ";")
@@ -137,22 +148,28 @@ CheckUpdate() {
         if (dir != "" && !FileExist(dir))
             DirCreate(dir)
         try {
-            ; 如果列表里包含了 version.txt 本身，跳过它，交由后面统一安全写入
             if (line = "version.txt")
                 continue
                 
+            ; ===== 新增：在屏幕中央动态显示下载进度 =====
+            currentProgress := successCount + failed.Length + 1
+            ToolTip("正在全力同步中，请稍候...`n进度: (" currentProgress "/" totalFiles ")`n当前文件: " line, A_ScreenWidth/2 - 150, A_ScreenHeight/2)
+            
             Download(base . EncodeUrl(line), localPath)
+            successCount++
         } catch {
             failed.Push(line)
         }
     }
+    
+    ToolTip() ; ===== 新增：下载完成后，切断并移除屏幕中央的提示框 =====
+    
     if (failed.Length > 0) {
         msg := ""
         for f in failed
             msg .= f "`n"
         MsgBox("以下文件下载失败：`n" msg, "部分更新失败", "IconX")
     } else {
-        ; ===== 核心修复：当所有文件都下载成功后，同步更新本地的 version.txt 文件 =====
         try {
             if FileExist(localVerFile)
                 FileDelete(localVerFile)
