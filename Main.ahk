@@ -3,6 +3,7 @@
 ;最低sleep为20
 ;sleep高很多
 ;每个脚本多一个功能`
+;测试
 
 #Requires AutoHotkey v2.0
 #SingleInstance Force
