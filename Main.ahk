@@ -4,8 +4,6 @@
 ;sleep高很多
 ;每个脚本多一个功能`
 
-
-
 #Requires AutoHotkey v2.0
 #SingleInstance Force
 CheckUpdate()
@@ -103,57 +101,157 @@ yPos += 38 + 15
 myGui.Show("w520 h" yPos)
 myGui.OnEvent("Close", (*) => ExitApp())
 
+
 CheckUpdate() {
     static base := "https://cdn.jsdelivr.net/gh/dzhao735-cloud/Genshin-qzd@main/"
     try {
         whr := ComObject("WinHttp.WinHttpRequest.5.1")
-        whr.Open("GET", base "version.txt", false)
+        ; 1. 获取版本时加上时间戳，干掉 jsDelivr 缓存
+        whr.Open("GET", base "version.txt?t=" A_TickCount, false)
         whr.SetTimeouts(5000, 5000, 10000, 10000)
         whr.Send()
         remoteVer := Trim(whr.ResponseText)
     } catch {
         return
     }
-    localVerFile := A_ScriptDir "\version.txt"
-    localVer := FileExist(localVerFile) ? Trim(FileRead(localVerFile)) : "0"
+    
+    localTextFile := A_ScriptDir "\version.txt"
+    localVer := FileExist(localTextFile) ? Trim(FileRead(localTextFile)) : "0"
     if (remoteVer = localVer || remoteVer = "")
         return
-    if MsgBox("发现新版本 v" remoteVer "  （当前 v" localVer "）`n是否立即更新？",
-              "脚本更新", "YesNo Icon?") != "Yes"
+        
+    if MsgBox("发现新版本 v" remoteVer "  （当前 v" localVer "）`n是否立即更新所有路线脚本？",
+              "千织屋自动锄地 - 脚本更新", "YesNo Icon?") != "Yes"
         return
+        
     try {
-        whr.Open("GET", base "filelist.txt", false)
+        ; 2. 获取 filelist.txt 加上时间戳，确保拿到最新名单
+        whr.Open("GET", base "filelist.txt?t=" A_TickCount, false)
         whr.Send()
         fileList := whr.ResponseText
     } catch {
         MsgBox("获取文件列表失败，请检查网络。", "更新失败", "IconX")
         return
     }
+    
+    if (Trim(fileList) == "") {
+        MsgBox("同步失败：从云端获取到的文件列表为空！", "错误", "IconX")
+        return
+    }
+    
     failed := []
+    successCount := 0
+    totalFiles := 0
+    
+    ; 先统计总文件数（排除空行和注释）
     for rawLine in StrSplit(fileList, "`n") {
         line := Trim(StrReplace(rawLine, "`r", ""))
-        if (line = "" || SubStr(line, 1, 1) = ";")
+        if (line != "" && SubStr(line, 1, 1) != ";" && line != "version.txt")
+            totalFiles++
+    }
+    
+    ; 开始遍历下载
+    for rawLine in StrSplit(fileList, "`n") {
+        line := Trim(StrReplace(rawLine, "`r", ""))
+        if (line = "" || SubStr(line, 1, 1) = ";" || line = "version.txt")
             continue
-        localPath := A_ScriptDir "\" StrReplace(line, "/", "\")
+            
+        ; 规范化本地保存路径，处理“精英怪/山鼬.ahk” -> “精英怪\山鼬.ahk”
+        standardLine := StrReplace(line, "/", "\")
+        localPath := A_ScriptDir "\" standardLine
+        
+        ; 自动创建对应的子文件夹
         SplitPath(localPath,, &dir)
         if (dir != "" && !FileExist(dir))
             DirCreate(dir)
+            
         try {
-            Download(base . EncodeUrl(line), localPath)
+            ; 显示动态下载进度，让用户知道卡在哪个文件
+            ToolTip("正在同步 (" successCount + failed.Length + 1 "/" totalFiles "):`n" line, A_ScreenWidth/2 - 100, A_ScreenHeight/2)
+            
+            ; ===== 核心修复：URL 编码时，必须对包含中文的子路径进行编码，同时挂上时间戳破缓存 =====
+            urlTarget := base . EncodeUrl(line) "?t=" A_TickCount
+            Download(urlTarget, localPath)
+            successCount++
         } catch {
             failed.Push(line)
         }
     }
+    
+    ToolTip() ; 关闭进度提示
+    
+    ; ===== 核心逻辑修正：安全校验 =====
     if (failed.Length > 0) {
         msg := ""
         for f in failed
-            msg .= f "`n"
-        MsgBox("以下文件下载失败：`n" msg, "部分更新失败", "IconX")
+            msg .= "❌ " f "`n"
+        MsgBox("以下文件下载失败（可能由于 CDN 暂未刷新或网络波动）：`n`n" msg "`n本地版本号未变动，请尝试重新运行主脚本更新。", "部分更新失败", "IconX")
     } else {
-        MsgBox("✅ 更新完成！将重新启动。", "更新成功", "Icon!")
-        Reload
+        ; 只有当全部文件成功下载覆盖后，才允许修改本地的 version.txt
+        try {
+            if FileExist(localTextFile)
+                FileDelete(localTextFile)
+            FileAppend(remoteVer, localTextFile, "UTF-8")
+        }
+        
+        BlockInput(false) ; 确保安全解锁键盘鼠标
+        MsgBox("✅ 所有路线脚本已成功同步至最新版 v" remoteVer "！`n将自动重新启动。", "更新成功", "Icon!")
+        Run('"' A_AhkPath '" "' A_ScriptFullPath '"')
+        ExitApp()
     }
 }
+
+; CheckUpdate() {
+;     static base := "https://cdn.jsdelivr.net/gh/dzhao735-cloud/Genshin-qzd@main/"
+;     try {
+;         whr := ComObject("WinHttp.WinHttpRequest.5.1")
+;         whr.Open("GET", base "version.txt", false)
+;         whr.SetTimeouts(5000, 5000, 10000, 10000)
+;         whr.Send()
+;         remoteVer := Trim(whr.ResponseText)
+;     } catch {
+;         return
+;     }
+;     localVerFile := A_ScriptDir "\version.txt"
+;     localVer := FileExist(localVerFile) ? Trim(FileRead(localVerFile)) : "0"
+;     if (remoteVer = localVer || remoteVer = "")
+;         return
+;     if MsgBox("发现新版本 v" remoteVer "  （当前 v" localVer "）`n是否立即更新？",
+;               "脚本更新", "YesNo Icon?") != "Yes"
+;         return
+;     try {
+;         whr.Open("GET", base "filelist.txt", false)
+;         whr.Send()
+;         fileList := whr.ResponseText
+;     } catch {
+;         MsgBox("获取文件列表失败，请检查网络。", "更新失败", "IconX")
+;         return
+;     }
+;     failed := []
+;     for rawLine in StrSplit(fileList, "`n") {
+;         line := Trim(StrReplace(rawLine, "`r", ""))
+;         if (line = "" || SubStr(line, 1, 1) = ";")
+;             continue
+;         localPath := A_ScriptDir "\" StrReplace(line, "/", "\")
+;         SplitPath(localPath,, &dir)
+;         if (dir != "" && !FileExist(dir))
+;             DirCreate(dir)
+;         try {
+;             Download(base . EncodeUrl(line), localPath)
+;         } catch {
+;             failed.Push(line)
+;         }
+;     }
+;     if (failed.Length > 0) {
+;         msg := ""
+;         for f in failed
+;             msg .= f "`n"
+;         MsgBox("以下文件下载失败：`n" msg, "部分更新失败", "IconX")
+;     } else {
+;         MsgBox("✅ 更新完成！将重新启动。", "更新成功", "Icon!")
+;         Reload
+;     }
+; }
 
 EncodeUrl(str) {
     out := ""
