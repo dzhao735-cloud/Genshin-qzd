@@ -20,13 +20,13 @@ $Tab:: {
         if (pointIndex == 1) {
             Sleep(350)
             MouseMove(53, 666, 0)
-            Sleep(16)
+            Sleep(20)
             Click("Down")
-            Sleep(16)
+            Sleep(24)
             MouseMove(66, 666, 0)
-            Sleep(16)
+            Sleep(24)
             Click("Up")
-            Sleep(16)
+            Sleep(24)
             MouseMove(60, 927, 0)
             Loop 2 {
                 Click()
