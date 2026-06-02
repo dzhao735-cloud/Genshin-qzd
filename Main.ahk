@@ -201,6 +201,8 @@ CheckUpdate() {
     }
 }
 
+
+
 ; CheckUpdate() {
 ;     static base := "https://cdn.jsdelivr.net/gh/dzhao735-cloud/Genshin-qzd@main/"
 ;     try {
