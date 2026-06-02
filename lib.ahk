@@ -153,7 +153,7 @@ $-:: {
     BlockInput(true)
     try {
         Send "b"
-        ShowToast("✦ 正在吃>夜兰<的药", 1300)
+        ShowToast("✦ 正在吃-夜兰-的药", 1300)
         Sleep(780)
         MouseMove(1150, 68, 0)
         Click()
@@ -200,7 +200,7 @@ $=:: {
     BlockInput(true)
     try {
         Send "b"
-        ShowToast("✦ 正在吃>火神<的药", 1200)
+        ShowToast("✦ 正在吃-火神-的药", 1200)
         Sleep(780)
         MouseMove(1150, 68, 0)
         Click()
@@ -242,17 +242,3 @@ F3:: {
     ShowToast(A_IsSuspended ? "脚本已暂停" : "脚本已开启", 2000)
 }
 #SuspendExempt False
-
-            MouseMove(53, 666, 0)
-            Sleep(16)
-            Click("Down")
-            Sleep(16)
-            MouseMove(66, 666, 0)
-            Sleep(16)
-            Click("Up")
-            Sleep(16)
-            MouseMove(60, 927, 0)
-            Loop 3 {
-                Click()
-                Sleep(32)
-            }
