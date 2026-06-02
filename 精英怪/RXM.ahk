@@ -18,7 +18,7 @@ $Tab:: {
         Click()
         Send "m"
         if (pointIndex == 1) {
-            Sleep(350)
+            Sleep(360)
             MouseMove(53, 666, 0)
             Sleep(20)
             Click("Down")
