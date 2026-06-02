@@ -47,7 +47,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 2) {
-            Sleep(250)
+            Sleep(280)
             ShowClickMark(1158, 790)
             MouseMove(1158, 790, 0)
             Click()
@@ -70,7 +70,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 3) {
-            Sleep(250)
+            Sleep(280)
             ShowClickMark(1647, 706)
             MouseMove(1647, 706, 0)
             Click()
@@ -93,7 +93,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 4) {
-            Sleep(250)
+            Sleep(280)
             ShowClickMark(1241, 686)
             MouseMove(1241, 686, 0)
             Click()
@@ -116,7 +116,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 5) {
-            Sleep(250)
+            Sleep(280)
             ShowClickMark(1423, 716)
             MouseMove(1423, 716, 0)
             Click()
@@ -139,7 +139,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 6) {
-            Sleep(250)
+            Sleep(280)
             ShowClickMark(1277, 724)
             MouseMove(1277, 724, 0)
             Click()
@@ -162,7 +162,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 7) {
-            Sleep(250)
+            Sleep(280)
             ShowClickMark(1096, 1036)
             MouseMove(1096, 1036, 0)
             Click()
@@ -185,7 +185,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 8) {
-            Sleep(250)
+            Sleep(280)
             ShowClickMark(1225, 828)
             MouseMove(1225, 828, 0)
             Click()
@@ -208,7 +208,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 9) {
-            Sleep(250)
+            Sleep(280)
             ShowClickMark(1107, 815)
             MouseMove(1107, 815, 0)
             Click()
@@ -231,7 +231,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 10) {
-            Sleep(250)
+            Sleep(280)
             ShowClickMark(1267, 535)
             MouseMove(1267, 535, 0)
             Click()
@@ -254,7 +254,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 11) {
-            Sleep(250)
+            Sleep(280)
             ShowClickMark(1131, 874)
             MouseMove(1131, 874, 0)
             Click()
@@ -299,7 +299,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 13) {
-            Sleep(250)
+            Sleep(280)
             ShowClickMark(1175, 1498)
             MouseMove(1175, 1498, 0)
             Click()
@@ -322,7 +322,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 14) {
-            Sleep(250)
+            Sleep(280)
             ShowClickMark(1514, 791)
             MouseMove(1514, 791, 0)
             Click()
@@ -345,7 +345,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 15) {
-            Sleep(320)
+            Sleep(350)
             MouseMove(60, 666, 0)
             Loop 2 {
                 Click()
@@ -366,7 +366,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 16) {
-            Sleep(250)
+            Sleep(280)
             ShowClickMark(915, 1477)
             MouseMove(915, 1477, 0)
             Click()
@@ -389,7 +389,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 17) {
-            Sleep(250)
+            Sleep(280)
             ShowClickMark(1556, 581)
             MouseMove(1556, 581, 0)
             Click()
@@ -412,7 +412,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 18) {
-            Sleep(250)
+            Sleep(280)
             ShowClickMark(1187, 757)
             MouseMove(1187, 757, 0)
             Click()
@@ -435,7 +435,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 19) {
-            Sleep(250)
+            Sleep(280)
             ShowClickMark(1482, 995)
             MouseMove(1482, 995, 0)
             Click()
@@ -458,7 +458,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 20) {
-            Sleep(250)
+            Sleep(280)
             ShowClickMark(1552, 616)
             MouseMove(1552, 616, 0)
             Click()
@@ -481,7 +481,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 21) {
-            Sleep(250)
+            Sleep(280)
             ShowClickMark(1676, 168)
             MouseMove(1676, 168, 0)
             Click()
@@ -504,7 +504,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 22) {
-            Sleep(320)
+            Sleep(350)
             MouseMove(60, 927, 0)
             Click()
             Sleep(20)
@@ -562,7 +562,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 24) {
-            Sleep(320)
+            Sleep(350)
             MouseMove(60, 927, 0)
             Loop 3 {
                 Click()
@@ -583,7 +583,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 25) {
-            Sleep(250)
+            Sleep(280)
             ShowClickMark(1130, 311)
             MouseMove(1130, 311, 0)
             Click()

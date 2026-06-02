@@ -119,7 +119,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 4) {
-            Sleep(230)
+            Sleep(280)
             ShowClickMark(1359, 817)
             MouseMove(1359, 817, 0)
             Click()
@@ -181,7 +181,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 6) {
-            Sleep(230)
+            Sleep(280)
             ShowClickMark(2455, 641)
             MouseMove(2455, 641, 0)
             Click()
@@ -225,7 +225,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 7) {
-            Sleep(230)
+            Sleep(280)
             ShowClickMark(653, 154)
             MouseMove(653, 154, 0)
             Click()
@@ -287,7 +287,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 9) {
-            Sleep(280)
+            Sleep(330)
             MouseMove(60, 927, 0)
             Click()
             Sleep(20)
@@ -320,7 +320,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 10) {
-            Sleep(230)
+            Sleep(280)
             ShowClickMark(2190, 925)
             MouseMove(2190, 925, 0)
             Click()
@@ -393,7 +393,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 12) {
-            Sleep(230)
+            Sleep(280)
             ShowClickMark(2181, 285)
             MouseMove(2181, 285, 0)
             Click()
@@ -435,7 +435,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 13) {
-            Sleep(230)
+            Sleep(280)
             ShowClickMark(2018, 332)
             MouseMove(2018, 332, 0)
             Click()
@@ -477,7 +477,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 14) {
-            Sleep(230)
+            Sleep(280)
             ShowClickMark(1417, 530)
             MouseMove(1417, 530, 0)
             Click()
@@ -592,7 +592,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 18) {
-            Sleep(230)
+            Sleep(280)
             ShowClickMark(1787, 1166)
             MouseMove(1787, 1166, 0)
             Click()
@@ -631,13 +631,13 @@ $Tab:: {
             Click()
             Sleep(200)
             MouseMove(53, 927, 0)
-            Sleep(16)
+            Sleep(20)
             Click("Down")
-            Sleep(16)
+            Sleep(24)
             MouseMove(66, 927, 0)
-            Sleep(16)
+            Sleep(24)
             Click("Up")
-            Sleep(16)
+            Sleep(24)
             ShowClickMark(1280, 800)
             MouseMove(1280, 800, 0)
             Click()
@@ -660,7 +660,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 20) {
-            Sleep(230)
+            Sleep(250)
             ShowClickMark(1254, 1061)
             MouseMove(1254, 1061, 0)
             Click()
@@ -690,7 +690,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 21) {
-            Sleep(230)
+            Sleep(250)
             ShowClickMark(1379, 1141)
             MouseMove(1379, 1141, 0)
             Click()
@@ -720,7 +720,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 22) {
-            Sleep(230)
+            Sleep(250)
             ShowClickMark(1684, 899)
             MouseMove(1684, 899, 0)
             Click()
@@ -779,7 +779,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 24) {
-            Sleep(230)
+            Sleep(250)
             ShowClickMark(2119, 891)
             MouseMove(2119, 891, 0)
             Click()
@@ -821,7 +821,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 25) {
-            Sleep(230)
+            Sleep(250)
             ShowClickMark(1384, 1031)
             MouseMove(1384, 1031, 0)
             Click()
@@ -851,7 +851,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 26) {
-            Sleep(230)
+            Sleep(250)
             ShowClickMark(725, 1364)
             MouseMove(725, 1364, 0)
             Click()
