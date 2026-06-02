@@ -102,7 +102,6 @@ myGui.Show("w520 h" yPos)
 myGui.OnEvent("Close", (*) => ExitApp())
 
 CheckUpdate() {
-    ; ===== 已成功移除 jsdelivr 替换为 GitHub 官方原生直链 =====
     static base := "https://raw.githubusercontent.com/dzhao735-cloud/Genshin-qzd/main/"
     try {
         whr := ComObject("WinHttp.WinHttpRequest.5.1")
@@ -138,6 +137,10 @@ CheckUpdate() {
         if (dir != "" && !FileExist(dir))
             DirCreate(dir)
         try {
+            ; 如果列表里包含了 version.txt 本身，跳过它，交由后面统一安全写入
+            if (line = "version.txt")
+                continue
+                
             Download(base . EncodeUrl(line), localPath)
         } catch {
             failed.Push(line)
@@ -149,6 +152,13 @@ CheckUpdate() {
             msg .= f "`n"
         MsgBox("以下文件下载失败：`n" msg, "部分更新失败", "IconX")
     } else {
+        ; ===== 核心修复：当所有文件都下载成功后，同步更新本地的 version.txt 文件 =====
+        try {
+            if FileExist(localVerFile)
+                FileDelete(localVerFile)
+            FileAppend(remoteVer, localVerFile, "UTF-8")
+        }
+        
         MsgBox("✅ 更新完成！将重新启动。", "更新成功", "Icon!")
         Reload
     }
