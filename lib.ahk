@@ -115,6 +115,34 @@ $`:: {
     busy := false
 }
 
+$F12:: {
+    static busy := false
+    if busy
+        return
+    busy := true
+
+    BlockInput(true)
+    try {
+        MouseMove(53, 927, 0)
+        Sleep(16)
+        Click("Down")
+        Sleep(16)
+        MouseMove(66, 927, 0)
+        Sleep(16)
+        Click("Up")
+        Sleep(16)
+        MouseMove(60, 666, 0)
+        Loop 2 {
+            Click()
+            Sleep(32)
+        }
+    } finally {
+        BlockInput(false)
+    }
+    KeyWait "F12"
+    busy := false
+}
+
 ;我的号 夜兰吃的药
 $-:: {
     static busy := false
@@ -214,3 +242,17 @@ F3:: {
     ShowToast(A_IsSuspended ? "脚本已暂停" : "脚本已开启", 2000)
 }
 #SuspendExempt False
+
+            MouseMove(53, 666, 0)
+            Sleep(16)
+            Click("Down")
+            Sleep(16)
+            MouseMove(66, 666, 0)
+            Sleep(16)
+            Click("Up")
+            Sleep(16)
+            MouseMove(60, 927, 0)
+            Loop 3 {
+                Click()
+                Sleep(32)
+            }
