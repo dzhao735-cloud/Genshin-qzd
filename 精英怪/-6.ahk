@@ -89,7 +89,7 @@ $Tab:: {
             Sleep(32)
             MouseMove(1900, 516, 0)
             Click()
-            Sleep(150)            
+            Sleep(100)            
             ShowClickMark(759, 1351)
             MouseMove(759, 1351, 0)
             Click()
