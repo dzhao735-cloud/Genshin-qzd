@@ -87,7 +87,7 @@ ShowToast(msg, duration := 2000) {
 
 ; =============== 只能游戏里触发 ================
 #HotIf WinActive("ahk_class UnityWndClass")
-;饭团自己的号吃的体力药
+;饭团的号 体力药
 $`:: {
     static busy := false
     if busy
@@ -97,6 +97,7 @@ $`:: {
     BlockInput(true)
     try {
         Send "b"
+        ShowToast("✦ 正在吃 回复体力药(饭团)", 1100)
         Sleep(780)
         MouseMove(1150, 68, 0)
         Click()
@@ -115,6 +116,7 @@ $`:: {
     busy := false
 }
 
+;调整地图大小
 $F12:: {
     static busy := false
     if busy
@@ -153,7 +155,7 @@ $-:: {
     BlockInput(true)
     try {
         Send "b"
-        ShowToast("✦ 正在吃-夜兰-的药", 1300)
+        ShowToast("✦ 正在吃 夜兰 的药(乆刄)", 1300)
         Sleep(780)
         MouseMove(1150, 68, 0)
         Click()
@@ -200,7 +202,7 @@ $=:: {
     BlockInput(true)
     try {
         Send "b"
-        ShowToast("✦ 正在吃-火神-的药", 1200)
+        ShowToast("✦ 正在吃 火神 的药(乆刄)", 1200)
         Sleep(780)
         MouseMove(1150, 68, 0)
         Click()
@@ -225,6 +227,44 @@ $=:: {
         BlockInput(false)
     }
     KeyWait "="
+    busy := false
+}
+
+;小美的号 恰吃的药
+$F10:: {
+    static busy := false
+    if busy
+        return
+    busy := true
+    
+    BlockInput(true)
+    try {
+        Send "b"
+        ShowToast("✦ 正在吃 恰 的药(小美)", 1200)
+        Sleep(780)
+        MouseMove(1150, 68, 0)
+        Click()
+        Sleep(330)
+        
+        MouseMove(240, 730, 0) ;第1个药的位置
+        Click()
+        Sleep(32)
+        MouseMove(2218, 1500, 0)
+        Click()
+        Sleep(20)
+        
+        MouseMove(1220, 975, 0) ;第2个药的位置
+        Click()
+        Sleep(32)
+        MouseMove(2218, 1500, 0)
+        Click()
+        Sleep(20)
+        
+        Send "{Esc}"
+    } finally {
+        BlockInput(false)
+    }
+    KeyWait "F10"
     busy := false
 }
 
