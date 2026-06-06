@@ -1,13 +1,13 @@
 #Include "..\lib.ahk"
 
+maxPoints := 26
 #HotIf WinActive("ahk_class UnityWndClass")
 $Tab:: {
+    global pointIndex, maxPoints
     static busy := false
     if busy
         return
     busy := true
-    static pointIndex := 1
-    static maxPoints := 26
     BlockInput(true)
     try {
         Send("{Enter}")

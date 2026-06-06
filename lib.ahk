@@ -268,6 +268,25 @@ $F10:: {
     busy := false
 }
 
+global pointIndex := 1
+global maxPoints := 1
+Left:: {
+    global pointIndex, maxPoints
+    if pointIndex > 1
+        pointIndex--
+    else
+        pointIndex := maxPoints
+    ShowToast("✦ 点位：" pointIndex " / " maxPoints)
+}
+Right:: {
+    global pointIndex, maxPoints
+    if pointIndex < maxPoints
+        pointIndex++
+    else
+        pointIndex := 1
+    ShowToast("✦ 点位：" pointIndex " / " maxPoints)
+}
+
 #HotIf
 ; =============================================
 
