@@ -5,7 +5,7 @@
 TraySetIcon("shell32.dll", 127)
 A_MenuMaskKey := "vkE8"
 CoordMode "Mouse", "Window"
-SendMode "Input"
+SendMode "Event"
 SetMouseDelay -1
 SetKeyDelay -1, -1
 SetWinDelay -1
