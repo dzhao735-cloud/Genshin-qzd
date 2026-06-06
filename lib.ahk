@@ -246,14 +246,14 @@ $F10:: {
         Click()
         Sleep(330)
         
-        MouseMove(240, 730, 0) ;第1个药的位置
+        MouseMove(433, 281, 0) ;第1个药的位置
         Click()
         Sleep(32)
         MouseMove(2218, 1500, 0)
         Click()
         Sleep(20)
         
-        MouseMove(1220, 975, 0) ;第2个药的位置
+        MouseMove(637, 300, 0) ;第2个药的位置
         Click()
         Sleep(32)
         MouseMove(2218, 1500, 0)
