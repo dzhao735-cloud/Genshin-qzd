@@ -85,6 +85,28 @@ ShowToast(msg, duration := 2000) {
     SetTimer(() => (g.Destroy(), g := ""), -duration)
 }
 
+MapMinimize(sleepTime := 24){
+    MouseMove(61, 670, 0)
+    Sleep(sleepTime - 4)
+    Click("Down")
+    Sleep(sleepTime)
+    MouseMove(61, 630, 0)
+    Sleep(sleepTime)
+    Click("Up")
+    Sleep(sleepTime)
+}
+
+MapMaximize(sleepTime := 24){
+    MouseMove(61, 927, 0)
+    Sleep(sleepTime - 4)
+    Click("Down")
+    Sleep(sleepTime)
+    MouseMove(61, 967, 0)
+    Sleep(sleepTime)
+    Click("Up")
+    Sleep(sleepTime)
+}
+
 ; =============== 只能游戏里触发 ================
 #HotIf WinActive("ahk_class UnityWndClass")
 ;饭团的号 体力药
@@ -126,13 +148,13 @@ $F12:: {
     BlockInput(true)
     try {
         MouseMove(53, 927, 0)
-        Sleep(16)
+        Sleep(20)
         Click("Down")
-        Sleep(16)
+        Sleep(24)
         MouseMove(66, 927, 0)
-        Sleep(16)
+        Sleep(24)
         Click("Up")
-        Sleep(16)
+        Sleep(24)
         MouseMove(60, 666, 0)
         Loop 2 {
             Click()

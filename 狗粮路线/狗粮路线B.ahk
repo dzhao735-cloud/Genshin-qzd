@@ -25,14 +25,7 @@ $Tab:: {
             MouseMove(2000,388,0)
             Click()
             Sleep(250)
-            MouseMove(53, 666, 0)
-            Sleep(20)
-            Click("Down")
-            Sleep(24)
-            MouseMove(66, 666, 0)
-            Sleep(24)
-            Click("Up")
-            Sleep(24)
+            MapMinimize()
             MouseMove(60, 927, 0)
             Loop 3 {
                 Click()
@@ -156,14 +149,7 @@ $Tab:: {
         else if (pointIndex == 6) {
             Sleep(420)
             SendInputDrag(1266,993,1449,388,300)
-            MouseMove(53, 666, 0)
-            Sleep(16)
-            Click("Down")
-            Sleep(16)
-            MouseMove(66, 666, 0)
-            Sleep(16)
-            Click("Up")
-            Sleep(16)
+            MapMinimize()
             ShowClickMark(1231,1389)
             MouseMove(1231,1389,0)
             Click()
@@ -363,14 +349,7 @@ $Tab:: {
         }
         else if (pointIndex == 14) {
             Sleep(350)
-            MouseMove(53, 927, 0)
-            Sleep(16)
-            Click("Down")
-            Sleep(16)
-            MouseMove(66, 927, 0)
-            Sleep(16)
-            Click("Up")
-            Sleep(32)
+            MapMaximize()
             SendInputDrag(614,1276,2330,179,200)
             MouseMove(60,666,0)
             Loop 3 {
@@ -394,14 +373,7 @@ $Tab:: {
         }
         else if (pointIndex == 15) {
             Sleep(350)
-            MouseMove(53, 927, 0)
-            Sleep(20)
-            Click("Down")
-            Sleep(24)
-            MouseMove(66, 927, 0)
-            Sleep(24)
-            Click("Up")
-            Sleep(32)
+            MapMaximize()
             SendInputDrag(1386,1389,1171,34,200)
             MouseMove(60,666,0)
             Loop 2 {

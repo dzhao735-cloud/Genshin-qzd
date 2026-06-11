@@ -97,7 +97,31 @@ exitBtn := myGui.Add("Button", "x" leftPad " y" yPos " w490 h38", "退出")
 exitBtn.OnEvent("Click", (*) => ExitApp())
 yPos += 38 + 15
 
-myGui.Show("w520 h" yPos)
+; =============== 以下为热键功能预览 ===============
+myGui.Add("Text", "x535 y0 w2 h" yPos " Background404060")
+myGui.SetFont("s12 cFFD700 w700", "Microsoft YaHei")
+myGui.Add("Text", "x550 y10 w250 h24 BackgroundTrans", "热键功能预览")
+myGui.SetFont("s11 cE0E0E0 w400", "Microsoft YaHei")
+notes := "
+(
+
+Tab: 执行当前点位
+←: 后退一个点位
+→: 前进一个点位
+F3: 暂停/开启脚本
+F4: 重新选择路线
+F12: 调整地图大小 (建议连按两次)
+
+══════ 吃药功能 ══════
+~/``: 回复体力药 (饭团)
+F10: 恰 (小美) 背包里第2个和第3个的位置
+-/——: 夜兰 (乆刄)
+=/+: 火神 (乆刄)
+
+)"
+myGui.Add("Text", "x550 y40 w250 BackgroundTrans", notes)
+myGui.Show("w820 h" yPos)
+
 myGui.OnEvent("Close", (*) => ExitApp())
 
 CheckUpdate() {
