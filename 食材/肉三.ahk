@@ -18,7 +18,7 @@ $Tab:: {
         Click()
         Send "m"
         if (pointIndex == 1) {
-            Sleep(360)
+            Sleep(400)
             MapMinimize()
             MouseMove(60, 927, 0)
             Loop 3 {
