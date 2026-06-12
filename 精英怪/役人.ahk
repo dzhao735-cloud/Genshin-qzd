@@ -18,7 +18,7 @@ $Tab:: {
         Click()
         Send "m"
         if (pointIndex == 1) {
-            Sleep(360)
+            Sleep(380)
             MapMinimize()
             MouseMove(60, 927, 0)
             Loop 3 {
@@ -32,7 +32,7 @@ $Tab:: {
             MouseMove(2300, 1500, 0)
             Click()
 
-            Sleep(130)
+            Sleep(80)
             MouseMove(871, 551, 0)
             Click()
             Sleep(20)
@@ -86,7 +86,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 4) {
-            Sleep(360)
+            Sleep(400)
             MouseMove(60, 666, 0)
             Loop 2 {
                 Click()
@@ -102,19 +102,19 @@ $Tab:: {
             Sleep(50)
             MouseMove(1178, 905, 0)
             Click()
-            Sleep(220)
+            Sleep(80)
             MouseMove(2300, 1500, 0)
             Click()
 
-            Sleep(100)
+            Sleep(80)
             MouseMove(1178, 905, 0)
             Click()
-            Sleep(220)
+            Sleep(80)
             MouseMove(2300, 1500, 0)
             Click()
         }
         else if (pointIndex == 5) {
-            Sleep(330)
+            Sleep(350)
             MouseMove(2300, 1500, 0)
             Click()
             Sleep(32)
@@ -191,7 +191,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 8) {
-            Sleep(330)
+            Sleep(360)
             MouseMove(60, 666, 0)
             Loop 2 {
                 Click()
@@ -311,7 +311,7 @@ $Tab:: {
             MouseMove(2300, 1500, 0)
             Click()
 
-            Sleep(50)
+            Sleep(80)
             MouseMove(778, 958, 0)
             Click()
             Sleep(80)
