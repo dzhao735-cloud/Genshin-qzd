@@ -95,10 +95,7 @@ $Tab:: {
             ShowToast("✦ 已执行点位 " (pointIndex - 1) " --> 准备点位 " pointIndex)
         }
     } finally {
-        Send "{LButton Up}"
-        Send "{RButton Up}"
-        Send "{w up}{a up}{s up}{d up}"
-        Sleep(50)
+        ButtonsUp()
         BlockInput(false)
     }
     KeyWait "Tab"

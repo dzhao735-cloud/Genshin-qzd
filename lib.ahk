@@ -14,6 +14,16 @@ DllCall("winmm.dll\timeBeginPeriod", "UInt", 1)
 OnExit((*) => DllCall("winmm.dll\timeEndPeriod", "UInt", 1))
 
 ; =============== 公共函数 ===============
+OpenMapQuick(pointIndexValue, sleepTime := 120, pointsString := ",1,") {
+    Send("{Enter}")
+    Sleep(InStr(pointsString, "," pointIndexValue ",") ? sleepTime : 50)
+    MouseMove(226, 170, 0)
+    Send("{Escape}")
+    Sleep(40)
+    Click()
+    Send "m"
+}
+
 ShowClickMark(x, y) {
     try {
         WinGetPos(&wx, &wy, , , "ahk_class UnityWndClass")
@@ -105,6 +115,14 @@ MapMaximize(sleepTime := 24){
     Sleep(sleepTime)
     Click("Up")
     Sleep(sleepTime)
+}
+
+ButtonsUp(){
+    Sleep(50)
+    Send "{LButton Up}"
+    Send "{RButton Up}"
+    Send "{w up}{a up}{s up}{d up}"
+    Sleep(50)
 }
 
 ; =============== 只能游戏里触发 ================

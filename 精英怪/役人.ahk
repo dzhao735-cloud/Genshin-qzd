@@ -10,13 +10,7 @@ $Tab:: {
     busy := true
     BlockInput(true)
     try {
-        Send("{Enter}")
-        Sleep(InStr(",1,", "," pointIndex ",") ? 120 : 50)
-        MouseMove(226, 170, 0)
-        Send("{Escape}")
-        Sleep(40)
-        Click()
-        Send "m"
+        OpenMapQuick(pointIndex)
         if (pointIndex == 1) {
             Sleep(380)
             MapMinimize()
@@ -326,10 +320,7 @@ $Tab:: {
             ShowToast("✦ 已执行点位 " (pointIndex - 1) " --> 准备点位 " pointIndex)
         }
     } finally {
-        Send "{LButton Up}"
-        Send "{RButton Up}"
-        Send "{w up}{a up}{s up}{d up}"
-        Sleep(50)
+        ButtonsUp()
         BlockInput(false)
     }
     KeyWait "Tab"
