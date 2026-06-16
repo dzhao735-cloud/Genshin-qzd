@@ -55,6 +55,19 @@ $Tab:: {
             Sleep(20)
             MouseMove(2300, 1500, 0)
             Click()
+
+            Sleep(32)
+            MouseMove(1300, 1050, 0)
+            Click()
+            Sleep(32)
+            MouseMove(1130, 1003, 0)
+            Click()
+            Sleep(580)
+            MouseMove(1830, 1135, 0)
+            Click()
+            Sleep(20)
+            MouseMove(2300, 1500, 0)
+            Click()
         }
         else if (pointIndex == 3) {
             Sleep(280)

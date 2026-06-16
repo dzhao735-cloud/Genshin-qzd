@@ -111,13 +111,13 @@ $Tab:: {
             Sleep(32)
             MouseMove(2300, 525, 0)
             Click()
-            Sleep(450)
+            Sleep(500)
             MouseMove(60, 927, 0)
             Loop 2 {
                 Click()
                 Sleep(32)
             }
-            Sleep(100)
+            Sleep(150)
             SendInputDrag(803, 1387, 1579, 689, 600)
             ShowClickMark(740, 1329)
             MouseMove(740, 1329, 0)

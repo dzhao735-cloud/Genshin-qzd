@@ -168,7 +168,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 6) {
-            Sleep(280)
+            Sleep(350)
             ShowClickMark(2455, 641)
             MouseMove(2455, 641, 0)
             Click()
@@ -204,7 +204,7 @@ $Tab:: {
             Sleep(32)
             MouseMove(2455, 641, 0)
             Click()
-            Sleep(600)
+            Sleep(580)
             MouseMove(1830, 1135, 0)
             Click()
             Sleep(20)

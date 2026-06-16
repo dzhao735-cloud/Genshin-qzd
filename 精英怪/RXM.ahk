@@ -12,7 +12,7 @@ $Tab:: {
     try {
         OpenMapQuick(pointIndex)
         if (pointIndex == 1) {
-            Sleep(380)
+            Sleep(390)
             MapMinimize(32)
             MouseMove(60, 927, 0)
             Loop 2 {
@@ -126,7 +126,7 @@ $Tab:: {
             Click()
         }
         else if (pointIndex == 6) {
-            Sleep(370)
+            Sleep(380)
             MouseMove(60, 927, 0)
             Click()
             Sleep(32)
