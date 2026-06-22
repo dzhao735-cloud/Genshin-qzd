@@ -14,7 +14,6 @@ $Tab:: {
         if (pointIndex == 1) {
             Sleep(360)
             MapMinimize()
-            ShowClickMark(1700, 961)
             MouseMove(1700, 961, 0)
             Click()
             Sleep(20)
@@ -37,7 +36,6 @@ $Tab:: {
         }
         else if (pointIndex == 2) {
             Sleep(280)
-            ShowClickMark(1143, 1060)
             MouseMove(1143, 1060, 0)
             Click()
             Sleep(20)
@@ -71,7 +69,6 @@ $Tab:: {
                 Click()
                 Sleep(32)
             }
-            ShowClickMark(1113, 525)
             MouseMove(1113, 525, 0)
             Click()
             Sleep(20)
@@ -94,7 +91,6 @@ $Tab:: {
         }
         else if (pointIndex == 4) {
             Sleep(250)
-            ShowClickMark(1292, 736)
             MouseMove(1292, 736, 0)
             Click()
             Sleep(20)
@@ -117,7 +113,6 @@ $Tab:: {
         }
         else if (pointIndex == 5) {
             Sleep(250)
-            ShowClickMark(1032, 1245)
             MouseMove(1032, 1245, 0)
             Click()
             Sleep(20)
@@ -140,7 +135,6 @@ $Tab:: {
         }
         else if (pointIndex == 6) {
             Sleep(250)
-            ShowClickMark(1484, 691)
             MouseMove(1484, 691, 0)
             Click()
             Sleep(20)
@@ -163,7 +157,6 @@ $Tab:: {
         }
         else if (pointIndex == 7) {
             Sleep(280)
-            ShowClickMark(1972, 780)
             MouseMove(1972, 780, 0)
             Click()
             Sleep(20)

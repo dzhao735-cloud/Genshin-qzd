@@ -21,7 +21,6 @@ $Tab:: {
             }
             Sleep(80)
             SendInputDrag(1366,1462,1253,681,600)
-            ShowClickMark(1332, 1267)
             MouseMove(1332, 1267, 0)
             Click()
             Sleep(80)
@@ -45,7 +44,6 @@ $Tab:: {
         else if (pointIndex == 2) {
             Sleep(420)
             SendInputDrag(1559,1514,1004,24,700)
-            ShowClickMark(1529, 1572)
             MouseMove(1529, 1572, 0)
             Click()
             Sleep(20)
@@ -68,7 +66,6 @@ $Tab:: {
         }
         else if (pointIndex == 3) {
             Sleep(280)
-            ShowClickMark(1862, 444)
             MouseMove(1862, 444, 0)
             Click()
             Sleep(20)
@@ -99,7 +96,6 @@ $Tab:: {
         }
         else if (pointIndex == 4) {
             Sleep(280)
-            ShowClickMark(1605, 1374)
             MouseMove(1605, 1374, 0)
             Click()
             Sleep(20)
@@ -122,7 +118,6 @@ $Tab:: {
         }
         else if (pointIndex == 5) {
             Sleep(280)
-            ShowClickMark(2549, 168)
             MouseMove(2549, 168, 0)
             Click()
             Sleep(20)
@@ -153,7 +148,6 @@ $Tab:: {
         }
         else if (pointIndex == 6) {
             Sleep(280)
-            ShowClickMark(1553, 1160)
             MouseMove(1553, 1160, 0)
             Click()
             Sleep(20)
@@ -176,7 +170,6 @@ $Tab:: {
         }
         else if (pointIndex == 7) {
             Sleep(280)
-            ShowClickMark(490, 304)
             MouseMove(490, 304, 0)
             Click()
             Sleep(20)
@@ -200,7 +193,6 @@ $Tab:: {
         else if (pointIndex == 8) {
             Sleep(420)
             SendInputDrag(1341,601,1103,1241,400)
-            ShowClickMark(1170, 278)
             MouseMove(1170, 278, 0)
             Click()
             Sleep(20)

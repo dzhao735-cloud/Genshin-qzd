@@ -19,7 +19,6 @@ $Tab:: {
                 Click()
                 Sleep(32)
             }
-            ShowClickMark(1900, 1599)
             MouseMove(1900, 1599, 0)
             Click()
             Sleep(20)
@@ -45,7 +44,6 @@ $Tab:: {
             MouseMove(1900, 511, 0)
             Click()
             Sleep(200)
-            ShowClickMark(1561, 1357)
             MouseMove(1561, 1357, 0)
             Click()
             Sleep(80)
@@ -61,7 +59,6 @@ $Tab:: {
         }
         else if (pointIndex == 3) {
             Sleep(280)
-            ShowClickMark(1039, 734)
             MouseMove(1039, 734, 0)
             Click()
             Sleep(20)
@@ -84,7 +81,6 @@ $Tab:: {
         }
         else if (pointIndex == 4) {
             Sleep(280)
-            ShowClickMark(1079, 535)
             MouseMove(1079, 535, 0)
             Click()
             Sleep(20)
@@ -107,7 +103,6 @@ $Tab:: {
         }
         else if (pointIndex == 5) {
             Sleep(280)
-            ShowClickMark(1691, 1507)
             MouseMove(1691, 1507, 0)
             Click()
             Sleep(20)
@@ -130,7 +125,6 @@ $Tab:: {
         }
         else if (pointIndex == 6) {
             Sleep(280)
-            ShowClickMark(1259, 823)
             MouseMove(1259, 823, 0)
             Click()
             Sleep(20)
@@ -153,7 +147,6 @@ $Tab:: {
         }
         else if (pointIndex == 7) {
             Sleep(280)
-            ShowClickMark(2248, 630)
             MouseMove(2248, 630, 0)
             Click()
             Sleep(20)
@@ -190,7 +183,6 @@ $Tab:: {
             MouseMove(1900, 511, 0)
             Click()
             Sleep(170)
-            ShowClickMark(2186, 749)
             MouseMove(2186, 749, 0)
             Click()
             Sleep(20)

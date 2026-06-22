@@ -19,7 +19,6 @@ $Tab:: {
                 Click()
                 Sleep(32)
             }
-            ShowClickMark(1376, 802)
             MouseMove(1376, 802, 0)
             Click()
             Sleep(20)
@@ -35,7 +34,6 @@ $Tab:: {
         }
         else if (pointIndex == 2) {
             Sleep(230)
-            ShowClickMark(1539, 706)
             MouseMove(1539, 706, 0)
             Click()
             Sleep(20)
@@ -58,7 +56,6 @@ $Tab:: {
         }
         else if (pointIndex == 3) {
             Sleep(230)
-            ShowClickMark(1601, 538)
             MouseMove(1601, 538, 0)
             Click()
             Sleep(20)
@@ -81,7 +78,6 @@ $Tab:: {
         }
         else if (pointIndex == 4) {
             Sleep(230)
-            ShowClickMark(1062, 677)
             MouseMove(1062, 677, 0)
             Click()
             Sleep(20)
@@ -109,7 +105,6 @@ $Tab:: {
                 Click()
                 Sleep(32)
             }
-            ShowClickMark(2087, 846)
             MouseMove(2087, 846, 0)
             Click()
             Sleep(20)
@@ -140,7 +135,6 @@ $Tab:: {
         }
         else if (pointIndex == 6) {
             Sleep(230)
-            ShowClickMark(743, 380)
             MouseMove(743, 380, 0)
             Click()
             Sleep(20)
@@ -163,7 +157,6 @@ $Tab:: {
         }
         else if (pointIndex == 7) {
             Sleep(230)
-            ShowClickMark(1919, 458)
             MouseMove(1919, 458, 0)
             Click()
             Sleep(20)
@@ -197,7 +190,6 @@ $Tab:: {
             MouseMove(60, 927, 0)
             Click()
             Sleep(20)
-            ShowClickMark(1377, 428)
             MouseMove(1377, 428, 0)
             Click()
             Sleep(20)
@@ -225,7 +217,6 @@ $Tab:: {
                 Click()
                 Sleep(32)
             }
-            ShowClickMark(2073, 1427)
             MouseMove(2073, 1427, 0)
             Click()
             Sleep(20)
@@ -258,7 +249,6 @@ $Tab:: {
             }
             Sleep(80)
             SendInputDrag(1050, 241, 1342, 1265, 800)
-            ShowClickMark(1022, 124)
             MouseMove(1022, 124, 0)
             Click()
             Sleep(20)
@@ -266,7 +256,6 @@ $Tab:: {
             Click()
 
             Sleep(50)
-            ShowClickMark(905, 138)
             MouseMove(905, 138, 0)
             Click()
             Sleep(20)

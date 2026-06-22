@@ -14,7 +14,6 @@ $Tab:: {
         if (pointIndex == 1) {
             Sleep(320)
             MapMaximize()
-            ShowClickMark(1164, 1519)
             MouseMove(1164, 1519, 0)
             Click()
             Sleep(20)
@@ -30,7 +29,6 @@ $Tab:: {
         }
         else if (pointIndex == 2) {
             Sleep(230)
-            ShowClickMark(1212, 478)
             MouseMove(1212, 478, 0)
             Click()
             Sleep(20)
@@ -53,7 +51,6 @@ $Tab:: {
         }
         else if (pointIndex == 3) {
             Sleep(230)
-            ShowClickMark(1541, 838)
             MouseMove(1541, 838, 0)
             Click()
             Sleep(20)

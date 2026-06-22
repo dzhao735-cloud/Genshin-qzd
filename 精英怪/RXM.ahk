@@ -19,7 +19,6 @@ $Tab:: {
                 Click()
                 Sleep(32)
             }
-            ShowClickMark(1002, 506)
             MouseMove(1002, 506, 0)
             Click()
             Sleep(80)
@@ -35,7 +34,6 @@ $Tab:: {
         }
         else if (pointIndex == 2) {
             Sleep(280)
-            ShowClickMark(1101, 938)
             MouseMove(1101, 938, 0)
             Click()
             Sleep(20)
@@ -58,7 +56,6 @@ $Tab:: {
         }
         else if (pointIndex == 3) {
             Sleep(280)
-            ShowClickMark(927, 1143)
             MouseMove(927, 1143, 0)
             Click()
             Sleep(20)
@@ -81,7 +78,6 @@ $Tab:: {
         }
         else if (pointIndex == 4) {
             Sleep(280)
-            ShowClickMark(679, 537)
             MouseMove(679, 537, 0)
             Click()
             Sleep(20)
@@ -104,7 +100,6 @@ $Tab:: {
         }
         else if (pointIndex == 5) {
             Sleep(280)
-            ShowClickMark(1224, 871)
             MouseMove(1224, 871, 0)
             Click()
             Sleep(20)
@@ -131,7 +126,6 @@ $Tab:: {
             Click()
             Sleep(32)
             SendInputDrag(427, 1251, 1425, 636, 600)
-            ShowClickMark(163, 1377)
             MouseMove(163, 1377, 0)
             Click()
             Sleep(20)
@@ -147,7 +141,6 @@ $Tab:: {
         }
         else if (pointIndex == 7) {
             Sleep(280)
-            ShowClickMark(1091, 530)
             MouseMove(1091, 530, 0)
             Click()
             Sleep(20)
@@ -170,7 +163,6 @@ $Tab:: {
         }
         else if (pointIndex == 8) {
             Sleep(280)
-            ShowClickMark(918, 65)
             MouseMove(918, 65, 0)
             Click()
             Sleep(20)
@@ -199,7 +191,6 @@ $Tab:: {
             MouseMove(2324, 958, 0)
             Click()
             Sleep(200)
-            ShowClickMark(850, 1233)
             MouseMove(850, 1233, 0)
             Click()
             Sleep(20)
@@ -222,7 +213,6 @@ $Tab:: {
         }
         else if (pointIndex == 10) {
             Sleep(280)
-            ShowClickMark(2191, 891)
             MouseMove(2191, 891, 0)
             Click()
             Sleep(20)

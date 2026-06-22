@@ -24,24 +24,24 @@ OpenMapQuick(pointIndexValue, sleepTime := 120, pointsString := ",1,") {
     Send "m"
 }
 
-ShowClickMark(x, y) {
-    try {
-        WinGetPos(&wx, &wy, , , "ahk_class UnityWndClass")
-    } catch {
-        return
-    }
-    screenX := wx + x
-    screenY := wy + y
-    sz := 16
-    mark := Gui("+AlwaysOnTop -Caption +ToolWindow +E0x20")
-    mark.BackColor := "FF4444"
-    mark.Show("x" (screenX - sz//2) " y" (screenY - sz//2) " w" sz " h" sz " NoActivate")
-    WinSetRegion("0-0 W" sz " H" sz " E", mark.Hwnd)
-    WinSetTransparent(220, mark.Hwnd)
-    opacity := 220
-    FadeTimer := () => ((opacity -= 7),(opacity <= 0) ? (SetTimer(FadeTimer, 0), mark.Destroy()) : WinSetTransparent(opacity, mark.Hwnd))
-    SetTimer(FadeTimer, 40)
-}
+; ShowClickMark(x, y) {
+;     try {
+;         WinGetPos(&wx, &wy, , , "ahk_class UnityWndClass")
+;     } catch {
+;         return
+;     }
+;     screenX := wx + x
+;     screenY := wy + y
+;     sz := 16
+;     mark := Gui("+AlwaysOnTop -Caption +ToolWindow +E0x20")
+;     mark.BackColor := "FF4444"
+;     mark.Show("x" (screenX - sz//2) " y" (screenY - sz//2) " w" sz " h" sz " NoActivate")
+;     WinSetRegion("0-0 W" sz " H" sz " E", mark.Hwnd)
+;     WinSetTransparent(220, mark.Hwnd)
+;     opacity := 220
+;     FadeTimer := () => ((opacity -= 7),(opacity <= 0) ? (SetTimer(FadeTimer, 0), mark.Destroy()) : WinSetTransparent(opacity, mark.Hwnd))
+;     SetTimer(FadeTimer, 40)
+; }
 
 SendInputDrag(xS, yS, xE, yE, maxDeltaPerStep := 50) {
     MouseMove(xS, yS, 0)
@@ -316,7 +316,7 @@ Left:: {
         pointIndex--
     else
         pointIndex := maxPoints
-    ShowToast("✦ 点位：" pointIndex " / " maxPoints)
+    ShowToast("✦ 点位：" pointIndex " / " maxPoints, 900)
 }
 Right:: {
     global pointIndex, maxPoints
@@ -324,7 +324,7 @@ Right:: {
         pointIndex++
     else
         pointIndex := 1
-    ShowToast("✦ 点位：" pointIndex " / " maxPoints)
+    ShowToast("✦ 点位：" pointIndex " / " maxPoints, 900)
 }
 
 #HotIf
