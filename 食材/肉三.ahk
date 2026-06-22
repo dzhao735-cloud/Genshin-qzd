@@ -12,14 +12,14 @@ $Tab:: {
     try {
         OpenMapQuick(pointIndex)
         if (pointIndex == 1) {
-            Sleep(410)
+            Sleep(400)
             MapMinimize(30)
             MouseMove(60, 927, 0)
             Loop 3 {
                 Click()
                 Sleep(32)
             }
-            Sleep(40)
+            Sleep(80)
             SendInputDrag(1366,1462,1253,681,600)
             ShowClickMark(1332, 1267)
             MouseMove(1332, 1267, 0)
