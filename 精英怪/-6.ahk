@@ -1,6 +1,8 @@
 #Include "..\lib.ahk"
+#Include "..\检测圣遗物\圣遗物拾取模块.ahk"
 
 maxPoints := 26
+AP_Start()
 #HotIf WinActive("ahk_class UnityWndClass")
 $Tab:: {
     global pointIndex, maxPoints
