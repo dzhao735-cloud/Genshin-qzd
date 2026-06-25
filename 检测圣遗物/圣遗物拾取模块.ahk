@@ -229,7 +229,7 @@ AP_ListHasText() {
         return false
     }
     clean := StrReplace(StrReplace(result.Text, " "), "`t")
-    return (StrLen(clean) >= 3)             ; 至少4个字符,避免噪点/零星文字误判
+    return (StrLen(clean) >= 7)             ; 至少7个字符,避免噪点/零星文字误判
 }
 
 ; 检测地图是否打开(用 ImageSearch 找左下角地图特征图标)
