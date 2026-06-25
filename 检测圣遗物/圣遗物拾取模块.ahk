@@ -49,7 +49,7 @@ global AP_LIST_FULLTOP_Y := 558     ; >6条顶部排时第1条中心y
 global AP_ITEM_SPACING := 96        ; 条目间距
 
 ; 圣遗物套装特征字(材料名里没有这些字,命中任一即判定圣遗物)
-; 精英怪掉落:游医/流放者/教官/战狂。增删套装时改这里，‘官’ 字删掉了，因为其他普通材料也很容易出现这个字。
+; 精英怪掉落:游医/流放者/教官/战狂。增删套装时改这里，官 字删掉了，因为其他普通材料也很容易出现这个字。
 global AP_KEYWORDS := ["游", "医", "流", "放", "者", "教", "战", "狂"]
 
 ; ============================================================
@@ -92,14 +92,15 @@ AP_MainLoop() {
     ; ---- 两段式检测列表是否开启 ----
     fy := AP_GetFBoxY()
     if (fy = 0) {
-        ; F白框看不见。可能是 >6条且F在不可见位置 → 用OCR兜底确认列表在不在
-        if AP_ListHasText() {
-            ; 列表确实存在(有文字),只是F不可见 → 滚一格把F带回可见区
+        ; F白框看不见。可能是 >6条且F在不可见位置 → 用OCR兜底确认列表在不在。
+        ; 但要先排除"地图打开"——地图上也有文字,误判会导致滚轮缩放地图!
+        if (!AP_IsMapOpen() && AP_ListHasText()) {
+            ; 列表确实存在(有文字、且非地图),只是F不可见 → 滚一格把F带回可见区
             Send "{WheelDown}"
             AP_SetInterval(AP_ACTIVE_INTERVAL)
             return                  ; 下一轮F应可见,正常处理
         }
-        ; OCR也没文字 → 真没列表
+        ; 没列表(或在看地图)
         AP_SetInterval(AP_IDLE_INTERVAL)
         return
     }
@@ -228,7 +229,19 @@ AP_ListHasText() {
         return false
     }
     clean := StrReplace(StrReplace(result.Text, " "), "`t")
-    return (StrLen(clean) >= 2)             ; 至少2个字符,避免噪点误判
+    return (StrLen(clean) >= 3)             ; 至少4个字符,避免噪点/零星文字误判
+}
+
+; 检测地图是否打开(用 ImageSearch 找左下角地图特征图标)
+; 防止地图上的文字被误当成拾取列表而触发滚轮缩放地图
+; 依赖图片: ..\其他\images\ismapopen.png (相对于主脚本-6.ahk所在的精英怪目录)
+AP_IsMapOpen() {
+    imagePath := A_ScriptDir "\..\其他\images\ismapopen.png"
+    try {
+        if ImageSearch(&mx, &my, 45, 1490, 100, 1553, "*15 " imagePath)
+            return true
+    }
+    return false
 }
 
 ; OCR单行(F框那条),判断是否圣遗物
