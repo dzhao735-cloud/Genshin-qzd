@@ -158,7 +158,7 @@ AP_ProcessPickup() {
         }
 
         ; 到位后等画面稳定,OCR确认当前行确实是圣遗物再按F
-        Sleep 20
+        Sleep 30
         fy := AP_GetFBoxY()
         if (fy != 0 && AP_IsArtifactAtRow(fy)) {
             Send "f"
@@ -167,7 +167,7 @@ AP_ProcessPickup() {
             continue
         }
         ; 确认没通过(定位偏了),重测一次当前行
-        Sleep 30
+        Sleep 40
         fy := AP_GetFBoxY()
         if (fy != 0 && AP_IsArtifactAtRow(fy)) {
             Send "f"
