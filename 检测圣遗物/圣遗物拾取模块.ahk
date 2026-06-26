@@ -25,10 +25,19 @@ global AP_ON := false               ; 开关状态(由 AP_Start()/F7 控制,勿�
 global AP_IDLE_INTERVAL := 40       ; 空闲检测间隔(没列表时,ms)
 global AP_ACTIVE_INTERVAL := 20     ; 列表出现后的快速检测间隔(ms)
 global AP_CUR_INTERVAL := 50        ; 当前实际间隔(内部用)
-global AP_WHEEL_DELAY := 3          ; 滚轮中间步等待(ms);最后一步不等待
-global AP_PICK_WAIT := 60           ; 按F后等待列表刷新(ms)
+global AP_WHEEL_DELAY := 2          ; 滚轮中间步等待(ms);最后一步不等待
+global AP_PICK_WAIT := 75           ; 按F后等待列表刷新(ms)
 global AP_PROCESS_TIMEOUT := 1000   ; 单轮最长执行时间(ms),超时强制结束防卡死
 global AP_ProcessStart := 0         ; 内部:本轮开始时间戳
+global AP_SCROLL_COOLDOWN := 200    ; 两次"带回F"滚动的最小间隔(ms),防滚太快连滚两次
+global AP_LastScrollTime := 0       ; 内部:上次带回F滚动的时间戳
+global AP_MAP_COOLDOWN := 800       ; 检测到地图后,保持"地图开启"判定的时长(ms)
+                                    ; 让齿轮↔cross切换的空窗期不会误触滚轮
+global AP_LastMapTime := 0          ; 内部:上次检测到地图的时间戳
+global AP_MKEY_GRACE := 1200        ; 按M开/关地图后,这段时间内直接认定在地图(ms)
+                                    ; 解决"地图刚打开、齿轮还没出现,但已读到文字"的误滚
+global AP_LastMKeyTime := 0         ; 内部:上次按M的时间戳
+global AP_LIST_MIN_CHARS := 4       ; 兜底确认列表时,OCR至少要读到几个字(配合彩色检测双保险)
 
 ; ---------- 坐标参数(2560x1600 / DPI150%) ----------
 ; F白框检测区(列表里带"F"的白色方块所在竖条)
@@ -68,6 +77,13 @@ F7:: {
     }
 }
 
+; 监视M键(开/关地图):记录时间戳,给地图检测一个提前量。
+; ~ 表示不拦截,M键照常传给游戏。这样"地图刚打开、齿轮还没出现"时也能提前判定在地图。
+~m:: {
+    global AP_LastMKeyTime
+    AP_LastMKeyTime := A_TickCount
+}
+
 ; 在路线脚本自执行段调用,自动开启
 AP_Start() {
     global AP_ON, AP_CUR_INTERVAL, AP_IDLE_INTERVAL
@@ -92,11 +108,14 @@ AP_MainLoop() {
     ; ---- 两段式检测列表是否开启 ----
     fy := AP_GetFBoxY()
     if (fy = 0) {
-        ; F白框看不见。可能是 >6条且F在不可见位置 → 用OCR兜底确认列表在不在。
-        ; 但要先排除"地图打开"——地图上也有文字,误判会导致滚轮缩放地图!
-        if (!AP_IsMapOpen() && AP_ListHasText()) {
-            ; 列表确实存在(有文字、且非地图),只是F不可见 → 滚一格把F带回可见区
-            Send "{WheelDown}"
+        ; F白框看不见。可能是 >6条且F在不可见位置 → 确认列表存在再滚一格把F带回。
+        ; 三重防误触: 1)非地图  2)品质彩色文字够多  3)OCR确认有≥N个字
+        ; 再加滚动冷却,防止滚太快导致游戏连滚两格。
+        if (!AP_IsMapOpen() && AP_HasColoredText() && AP_ListHasText()) {
+            if (A_TickCount - AP_LastScrollTime >= AP_SCROLL_COOLDOWN) {
+                Send "{WheelDown}"
+                AP_LastScrollTime := A_TickCount
+            }
             AP_SetInterval(AP_ACTIVE_INTERVAL)
             return                  ; 下一轮F应可见,正常处理
         }
@@ -127,7 +146,7 @@ AP_SetInterval(ms) {
 ; ============================================================
 AP_ProcessPickup() {
     global
-    Loop 8 {                        ; 最多处理8个圣遗物/轮
+    Loop 6 {                        ; 最多处理6个圣遗物/轮
         if (A_TickCount - AP_ProcessStart > AP_PROCESS_TIMEOUT)
             return
 
@@ -221,26 +240,80 @@ AP_ScanList() {
 }
 
 ; OCR整个列表区域,只要识别到任何文字就算"列表存在"(用于F不可见时兜底)
+; 检测OCR区域是否有"品质彩色文字"(拾取列表特征)
+; 用GDI数彩色像素,不读文字内容,所以比OCR快(~3ms vs 16ms)
+; 原理:拾取列表物品名是品质色(青/蓝/紫/绿,三通道差大);
+;       角色详情数字是白色、地图地名是白/浅色(三通道接近) → 不算彩色 → 排除
+; 保险1a: 检测OCR区域是否有"品质彩色文字"(GDI数彩色像素,~3ms)
+; 拾取列表物品名是品质色(青/蓝/紫/绿,三通道差大);角色详情白数字、地图白地名不算彩色
+AP_HasColoredText() {
+    global AP_OCR_X, AP_OCR_Y, AP_OCR_W, AP_OCR_H
+    cap := AP_CaptureRect(AP_OCR_X, AP_OCR_Y, AP_OCR_W, AP_OCR_H)
+    data := cap.data
+    colored := 0
+    Loop AP_OCR_H {
+        ry := A_Index - 1
+        Loop AP_OCR_W {
+            rx := A_Index - 1
+            off := (ry * AP_OCR_W + rx) * 4
+            b := NumGet(data, off, "uchar")
+            g := NumGet(data, off + 1, "uchar")
+            r := NumGet(data, off + 2, "uchar")
+            mx := Max(r, g, b)
+            mn := Min(r, g, b)
+            if (mx > 150 && (mx - mn) > 60)     ; 够亮 且 三通道差大=品质彩色
+                colored++
+        }
+    }
+    return (colored > 800)                       ; 彩色文字像素够多
+}
+
+; 保险1b: OCR确认区域里确实有足够文字内容(配合彩色检测,双保险防误触)
 AP_ListHasText() {
-    global
+    global AP_OCR_X, AP_OCR_Y, AP_OCR_W, AP_OCR_H, AP_LIST_MIN_CHARS
     try {
         result := OCR.FromRect(AP_OCR_X, AP_OCR_Y, AP_OCR_W, AP_OCR_H, {lang:"zh-Hans-CN", scale:2})
     } catch {
         return false
     }
     clean := StrReplace(StrReplace(result.Text, " "), "`t")
-    return (StrLen(clean) >= 7)             ; 至少7个字符,避免噪点/零星文字误判
+    return (StrLen(clean) >= AP_LIST_MIN_CHARS)
 }
 
 ; 检测地图是否打开(用 ImageSearch 找左下角地图特征图标)
 ; 防止地图上的文字被误当成拾取列表而触发滚轮缩放地图
 ; 依赖图片: ..\其他\images\ismapopen.png (相对于主脚本-6.ahk所在的精英怪目录)
+; 检测地图是否打开:找地图界面的齿轮图标(比滑块菱形稳定,位置/形状固定)
+; 容错*30即可。齿轮检测区坐标需按实际位置校准。
+; 检测地图是否打开:齿轮 OR cross 任一匹配即地图开着。
+;  - 齿轮(ismapopen_gear):地图常驻左下角设置图标,大多数时候靠它
+;  - cross(ismapopen_cross):选锚点准备传送时齿轮会消失,用四向箭头兜底
+; 冷却机制:每次都先实检图标,检测到就刷新时间戳;没检测到时若仍在冷却窗口内也算开着。
+; 这样齿轮↔cross切换的空窗期(某一帧两个都没匹配上)由冷却桥接,不会漏判而误触滚轮;
+; 且因每次命中都续期,连续点锚点再返回也不会出现"冷却到期撞空窗"的漏判。
 AP_IsMapOpen() {
-    imagePath := A_ScriptDir "\..\其他\images\ismapopen.png"
+    global AP_MAP_COOLDOWN, AP_LastMapTime, AP_MKEY_GRACE, AP_LastMKeyTime
+    ; 提前量:刚按过M(开/关地图),这段时间直接认定在地图。
+    ; 覆盖"地图刚打开、齿轮还没渲染出来、但OCR已读到文字"的瞬间,防误滚。
+    if (A_TickCount - AP_LastMKeyTime < AP_MKEY_GRACE)
+        return true
+    ; 每次都【实际检测】齿轮/cross。检测到就刷新时间戳。
+    gearPath := A_ScriptDir "\..\其他\images\ismapopen_gear.png"
+    crossPath := A_ScriptDir "\..\其他\images\ismapopen_cross.png"
     try {
-        if ImageSearch(&mx, &my, 45, 1490, 100, 1553, "*15 " imagePath)
+        ; 齿轮在左下角; cross(选锚点时)在右上角 — 两个区域不同
+        if ImageSearch(&mx, &my, 41, 1484, 108, 1556, "*30 " gearPath)
+            or ImageSearch(&mx, &my, 2454, 6, 2535, 87, "*30 " crossPath) {
+            AP_LastMapTime := A_TickCount        ; 检测到,刷新时间戳
             return true
+        }
     }
+    ; 没检测到图标:若仍在上次检测后的冷却窗口内,仍认定开着(桥接齿轮↔cross空窗)。
+    ; 这里【不刷新】时间戳,所以地图真正关闭后冷却会自然过期,不会永久误判。
+    ; 关键:因为每次"检测到"都会刷新,只要地图开着、图标交替出现,窗口就持续滚动,
+    ;       不会出现旧逻辑"冷却期内不检测→到期正好撞空窗"的漏判。
+    if (A_TickCount - AP_LastMapTime < AP_MAP_COOLDOWN)
+        return true
     return false
 }
 
