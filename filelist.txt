@@ -22,6 +22,6 @@ Main.ahk
 检测圣遗物/OCR.ahk
 检测圣遗物/圣遗物拾取模块.ahk
 检测圣遗物/检测OCR语言.ahk
-其他/ischatopen.png
-其他/isf2open.png
-其他/ismapopen.png
+其他/images/ischatopen.png
+其他/images/isf2open.png
+其他/images/ismapopen.png
