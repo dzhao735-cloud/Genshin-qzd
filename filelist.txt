@@ -24,5 +24,5 @@ Main.ahk
 检测圣遗物/检测OCR语言.ahk
 其他/images/ischatopen.png
 其他/images/isf2open.png
-其他/images/ismapopen_gear.png
-其他/images/ismapopen_cross.png
+其他/images/enter.png
+其他/images/enter2.png
