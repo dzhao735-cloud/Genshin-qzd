@@ -45,7 +45,7 @@ categories := Map(
 )
 catOrder := ["精英怪", "传奇", "小怪", "狗粮路线", "食材"]
 
-myGui := Gui("+AlwaysOnTop -Resize", "原神锄地脚本")
+myGui := Gui("+AlwaysOnTop -Resize +E0x08000000", "原神锄地脚本")  ; WS_EX_NOACTIVATE：点路线按钮也不抢焦点/不切回桌面
 myGui.BackColor := "1a1a2e"
 myGui.SetFont("s13 cE0E0E0 w600", "Microsoft YaHei")
 myGui.Add("Text", "x0 y0 w520 h50 +0x200 BackgroundTrans Center", "原神锄地启动器")
@@ -121,7 +121,7 @@ F10: 恰 (小美) 背包里第2个和第3个的位置
 
 )"
 myGui.Add("Text", "x550 y40 w250 BackgroundTrans", notes)
-myGui.Show("w820 h" yPos)
+myGui.Show("NoActivate w820 h" yPos)
 
 myGui.OnEvent("Close", (*) => ExitApp())
 
@@ -140,15 +140,15 @@ CheckUpdate() {
     localVer := FileExist(localVerFile) ? Trim(FileRead(localVerFile)) : "0"
     if (remoteVer = localVer || remoteVer = "")
         return
-    if MsgBox("发现新版本 v" remoteVer "  （当前 v" localVer ")`n是否立即更新?",
-              "脚本更新", "YesNo Icon?") != "Yes"
+    if MsgNoActivate("发现新版本 v" remoteVer "  （当前 v" localVer ")`n是否立即更新?",
+              "脚本更新", "YesNo") != "Yes"
         return
     try {
         whr.Open("GET", base "filelist.txt", false)
         whr.Send()
         fileList := whr.ResponseText
     } catch {
-        MsgBox("获取文件列表失败，请检查网络。", "更新失败", "IconX")
+        MsgNoActivate("获取文件列表失败，请检查网络。", "更新失败")
         return
     }
     
@@ -192,17 +192,51 @@ CheckUpdate() {
         msg := ""
         for f in failed
             msg .= f "`n"
-        MsgBox("以下文件下载失败：`n" msg, "部分更新失败", "IconX")
+        MsgNoActivate("以下文件下载失败：`n" msg, "部分更新失败")
     } else {
         try {
             if FileExist(localVerFile)
                 FileDelete(localVerFile)
             FileAppend(remoteVer, localVerFile, "UTF-8")
         }
-        
-        MsgBox("✅ 更新完成！将重新启动。", "更新成功", "Icon!")
+
+        MsgNoActivate("✅ 更新完成！将重新启动。", "更新成功")
         Reload
     }
+}
+
+; 不抢焦点的消息框：用 NoActivate 的 GUI 代替 MsgBox，弹出时不会夺走游戏键盘焦点
+MsgNoActivate(text, title := "提示", buttons := "OK") {
+    result := ""
+    g := Gui("+AlwaysOnTop -MinimizeBox +ToolWindow +E0x08000000", title)  ; E0x08000000=WS_EX_NOACTIVATE，点击按钮也不激活/不抢焦点
+    g.MarginX := 22
+    g.MarginY := 18
+    g.SetFont("s11", "Microsoft YaHei")
+    txt := g.Add("Text", "", text)
+    txt.GetPos(&tx, &ty, &tw, &th)
+
+    btnW := 88, btnH := 34, gap := 26
+    blockW := (buttons = "YesNo") ? btnW * 2 + gap : btnW
+    contentW := Max(tw, blockW)
+    txt.Move(tx, ty, contentW)          ; 让文字宽度与整体一致，居中更协调
+    bx := tx + (contentW - blockW) / 2
+    by := ty + th + 18
+
+    if (buttons = "YesNo") {
+        b1 := g.Add("Button", "x" bx " y" by " w" btnW " h" btnH " Default", "是")
+        b2 := g.Add("Button", "x+" gap " yp w" btnW " h" btnH, "否")
+        b1.OnEvent("Click", (*) => (result := "Yes", g.Destroy()))
+        b2.OnEvent("Click", (*) => (result := "No", g.Destroy()))
+        g.OnEvent("Close", (*) => (result := "No", g.Destroy()))
+    } else {
+        b1 := g.Add("Button", "x" bx " y" by " w" btnW " h" btnH " Default", "确定")
+        b1.OnEvent("Click", (*) => (result := "OK", g.Destroy()))
+        g.OnEvent("Close", (*) => (result := "OK", g.Destroy()))
+    }
+    g.Show("NoActivate AutoSize")
+    while (result = "")
+        Sleep(50)
+    return result
 }
 
 EncodeUrl(str) {
