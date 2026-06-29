@@ -6,11 +6,32 @@
 
 #Requires AutoHotkey v2.0
 #SingleInstance Force
+
+; 弹界面时按住Alt(原神大世界要按Alt才出鼠标)，关界面/退出时松开
+; 必须在 CheckUpdate() 之前初始化：更新弹窗会用到 g_altHeld
+global g_altHeld := false
+
 CheckUpdate()
 
 LaunchRoute(filepath, *) {
+    ReleaseAlt()   ; 启动路线前先松开Alt(否则新脚本会带着Alt按住的状态)
     Run(A_ScriptDir "\" filepath)
     ExitApp()
+}
+
+HoldAlt() {
+    global g_altHeld
+    if (!g_altHeld && WinExist("ahk_class UnityWndClass")) {   ; 只有原神在运行时才按
+        Send("{Alt down}")
+        g_altHeld := true
+    }
+}
+ReleaseAlt() {
+    global g_altHeld
+    if (g_altHeld) {
+        Send("{Alt up}")
+        g_altHeld := false
+    }
 }
 
 categories := Map(
@@ -122,8 +143,10 @@ F10: 恰 (小美) 背包里第2个和第3个的位置
 )"
 myGui.Add("Text", "x550 y40 w250 BackgroundTrans", notes)
 myGui.Show("NoActivate w820 h" yPos)
+HoldAlt()   ; 界面显示后按住Alt，让原神大世界露出鼠标，方便点按钮
 
 myGui.OnEvent("Close", (*) => ExitApp())
+OnExit((*) => ReleaseAlt())   ; 兜底：任何退出路径(退出按钮/关闭/异常)都松开Alt，防止卡键
 
 CheckUpdate() {
     static base := "https://raw.githubusercontent.com/dzhao735-cloud/Genshin-qzd/main/"
@@ -207,6 +230,7 @@ CheckUpdate() {
 
 ; 不抢焦点的消息框：用 NoActivate 的 GUI 代替 MsgBox，弹出时不会夺走游戏键盘焦点
 MsgNoActivate(text, title := "提示", buttons := "OK") {
+    global g_altHeld
     result := ""
     g := Gui("+AlwaysOnTop -MinimizeBox +ToolWindow +E0x08000000", title)  ; E0x08000000=WS_EX_NOACTIVATE，点击按钮也不激活/不抢焦点
     g.MarginX := 22
@@ -233,9 +257,14 @@ MsgNoActivate(text, title := "提示", buttons := "OK") {
         b1.OnEvent("Click", (*) => (result := "OK", g.Destroy()))
         g.OnEvent("Close", (*) => (result := "OK", g.Destroy()))
     }
+    needAlt := !g_altHeld           ; 仅当本函数自己按下Alt时才负责松开，避免误放别处按住的Alt
+    if (needAlt)
+        HoldAlt()                   ; 弹框时也按住Alt，让原神大世界露出鼠标，方便点 是/否
     g.Show("NoActivate AutoSize")
     while (result = "")
         Sleep(50)
+    if (needAlt)
+        ReleaseAlt()                ; 关框后立即松开(CheckUpdate在OnExit注册前运行，必须自己兜底)
     return result
 }
 
