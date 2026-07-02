@@ -30,7 +30,7 @@ $Tab:: {
         }
         else if (pointIndex == 2) {
             Sleep(330)
-            MouseMove_Click_Sleep(938, 809, 580)
+            MouseMove_Click_Sleep(909, 803, 580)
             MouseMove_Click_Sleep(1809, 1141, 20)
             MouseMove_Click_Sleep(2249, 1503)
         }
