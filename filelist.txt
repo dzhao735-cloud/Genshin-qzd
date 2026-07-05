@@ -22,8 +22,11 @@ Main.ahk
 食材/肉三.ahk
 检测圣遗物/OCR.ahk
 检测圣遗物/圣遗物拾取模块.ahk
-检测圣遗物/检测OCR语言.ahk
 其他/images/ischatopen.png
 其他/images/isf2open.png
 其他/images/enter.png
 其他/images/enter2.png
+其他/images/fbox.png
+其他/侧键1.ahk
+其他/侧键2.ahk
+其他/F10.ahk

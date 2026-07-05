@@ -25,8 +25,8 @@ global AP_ON := false               ; 开关状态(由 AP_Start()/F7 控制,勿�
 global AP_IDLE_INTERVAL := 40       ; 空闲检测间隔(没列表时,ms)
 global AP_ACTIVE_INTERVAL := 20     ; 列表出现后的快速检测间隔(ms)
 global AP_CUR_INTERVAL := 50        ; 当前实际间隔(内部用)
-global AP_WHEEL_DELAY := 3          ; 滚轮中间步等待(ms);最后一步不等待
-global AP_PICK_WAIT := 60          ; 按F后等待列表刷新(ms)
+global AP_WHEEL_DELAY := 5          ; 滚轮中间步等待(ms);最后一步不等待
+global AP_PICK_WAIT := 100          ; 按F后等待列表刷新(ms)
 global AP_PROCESS_TIMEOUT := 1000   ; 单轮最长执行时间(ms),超时强制结束防卡死
 global AP_ProcessStart := 0         ; 内部:本轮开始时间戳
 global AP_SCROLL_COOLDOWN := 200    ; 两次"带回F"滚动的最小间隔(ms),防滚太快连滚两次
@@ -263,7 +263,8 @@ AP_IsWorldOpen() {
 AP_IsArtifactAtRow(fy) {
     global
     try {
-        result := OCR.FromRect(AP_OCR_X, fy - 35, AP_OCR_W, 70, {lang:"zh-Hans-CN", scale:2})
+        ; 确认区域:F中心上下各48(高96,约一个条目高),完整框住一行避免切字;scale3更清晰
+        result := OCR.FromRect(AP_OCR_X, fy - 48, AP_OCR_W, 96, {lang:"zh-Hans-CN", scale:3})
     } catch {
         return false
     }
@@ -326,7 +327,25 @@ AP_CaptureRect(x, y, w, h) {
 }
 
 ; 找F白框中心y(GDI截图后内存扫描)。找不到返回0
+; 找F白框中心y。双保险:先用ImageSearch找F图案(抗拾取特效干扰,主),
+; 找不到再退回GDI数白像素(F可能被遮一半时兜底)。找不到返回0。
 AP_GetFBoxY() {
+    global AP_FBOX_X1, AP_FBOX_X2, AP_FBOX_TOP, AP_FBOX_BOT
+    ; —— 主:ImageSearch找F图案 ——
+    ; 检测区x放宽一点(F会左右小幅移动),y用原范围
+    fboxPath := A_ScriptDir "\..\其他\images\fbox.png"
+    try {
+        if ImageSearch(&fx, &fy, AP_FBOX_X1 - 20, AP_FBOX_TOP, AP_FBOX_X2 + 20, AP_FBOX_BOT, "*20 " fboxPath) {
+            ; fy是模板左上角,加半个模板高(fbox.png高39)得中心
+            return fy + 19
+        }
+    }
+    ; —— 兜底:GDI数白像素(F被特效/遮挡影响时) ——
+    return AP_GetFBoxY_GDI()
+}
+
+; GDI数白像素找F白框中心y(兜底用)。找不到返回0。
+AP_GetFBoxY_GDI() {
     global AP_FBOX_X1, AP_FBOX_X2, AP_FBOX_TOP, AP_FBOX_BOT
     capW := AP_FBOX_X2 - AP_FBOX_X1 + 1
     capH := AP_FBOX_BOT - AP_FBOX_TOP + 1

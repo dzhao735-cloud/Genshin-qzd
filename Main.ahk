@@ -1,10 +1,4 @@
-﻿;自己的脚本与此脚本的区别：
-; tab键触发(不是caps lock)
-;最低sleep为20
-;sleep高很多
-;每个脚本多一个功能`
-
-#Requires AutoHotkey v2.0
+﻿#Requires AutoHotkey v2.0
 #SingleInstance Force
 
 ; 弹界面时按住Alt(原神大世界要按Alt才出鼠标)，关界面/退出时松开
@@ -64,8 +58,13 @@ categories := Map(
     "食材", [
         ["肉三", "食材\肉三.ahk"],
     ],
+    "测试用", [
+        ["双码头侧键1", "其他\侧键1.ahk"],
+        ["双码头侧键2", "其他\侧键2.ahk"],
+        ["双码头F10", "其他\F10.ahk"],
+    ],
 )
-catOrder := ["精英怪", "传奇", "小怪", "狗粮路线", "食材"]
+catOrder := ["精英怪", "传奇", "小怪", "狗粮路线", "食材", "测试用"]
 
 myGui := Gui("+AlwaysOnTop -Resize +E0x08000000", "原神锄地脚本")  ; WS_EX_NOACTIVATE：点路线按钮也不抢焦点/不切回桌面
 myGui.BackColor := "1a1a2e"

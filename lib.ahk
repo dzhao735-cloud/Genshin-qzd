@@ -295,6 +295,45 @@ Right:: {
     ShowToast("✦ 点位：" pointIndex " / " maxPoints, 900)
 }
 
+; ;火神双码头
+; global fireOn := false
+; global scriptBusy := false
+; XButton2:: {
+;     global fireOn
+;     fireOn := !fireOn
+;     if fireOn {
+;         SetTimer FireLoop, -1
+;     } else {
+;         fireOn := false
+;         Send "{LButton Up}{RButton Up}"
+;     }
+; }
+; FireLoop() {
+;     global fireOn, scriptBusy
+;     while fireOn {
+;         if scriptBusy {
+;             Sleep 100
+;             continue
+;         }
+;         Send "{LButton Down}"
+;         Sleep 205
+;         Send "{RButton Down}"
+;         Sleep 200
+;         Send "{LButton Up}"
+;         Sleep 2
+;         Send "{RButton Up}"
+;         Sleep 2
+;         Send "{LButton Down}"
+;         Sleep 160
+;         Send "{RButton Down}"
+;         Sleep 110
+;         Send "{RButton Up}"
+;         Sleep 1050
+;         Send "{LButton Up}"
+;         Sleep 560
+;     }
+;     Send "{LButton Up}{RButton Up}"
+; }
 #HotIf
 ; =============================================
 
