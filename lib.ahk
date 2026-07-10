@@ -42,7 +42,7 @@ SendInputDrag(xS, yS, xE, yE, maxDeltaPerStep := 50) {
         curX := Round(xS + totalDX * A_Index / steps)
         curY := Round(yS + totalDY * A_Index / steps)
         MouseMove(curX, curY, 0)
-        Sleep(28)
+        Sleep(32)
     }
     Sleep(32)
     SendInput("{LButton Up}")
