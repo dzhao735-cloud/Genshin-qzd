@@ -12,24 +12,24 @@ $Tab:: {
     try {
         OpenMapQuick(pointIndex)
         if (pointIndex == 1) {
-            Sleep(360)
-            MapMaximize()
-            Sleep(180)
-            SendInputDrag(315, 851, 2092, 847, 200)
-            SendInputDrag(315, 851, 2092, 847, 200)
+            Sleep(390)
+            MapMaximize(32)
+            Sleep(140)
+            SendInputDrag(300, 666, 2300, 671, 600)
+            SendInputDrag(300, 666, 2300, 671, 600)
             MouseMove(60,666,0)
             Loop 3 {
                 Click()
                 Sleep(32)
             }
             Sleep(170)
-            MouseMove_Click_Sleep(529, 1102, 20)
+            MouseMove_Click_Sleep(245, 1123, 20)
             MouseMove_Click_Sleep(2249, 1503, 40)
-            MouseMove_Click_Sleep(529, 1102, 20)
+            MouseMove_Click_Sleep(245, 1123, 20)
             MouseMove_Click_Sleep(2249, 1503)
         }
         else if (pointIndex == 2) {
-            Sleep(330)
+            Sleep(340)
             MouseMove_Click_Sleep(909, 803, 580)
             MouseMove_Click_Sleep(1809, 1141, 20)
             MouseMove_Click_Sleep(2249, 1503)
