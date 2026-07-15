@@ -66,23 +66,23 @@ categories := Map(
 )
 catOrder := ["精英怪", "传奇", "小怪", "狗粮路线", "食材", "测试用"]
 
-; ==================== 原神风配色 ====================
-C_WINBG  := "333A4A"    ; 窗口底·深石板蓝
-C_TBAR   := "2A3040"    ; 标题栏
-C_GOLD   := "D3BC8E"    ; 香槟金
-C_CREAM  := "ECE5D8"    ; 米白(按钮文字/悬停填充)
-C_INK    := "3D4556"    ; 悬停后的深色文字
-C_BTNBG  := "3E4557"    ; 按钮底
-C_BTNBD  := "6B6862"    ; 按钮细金边
-C_LINE   := "6E6757"    ; 分类标题延长线
-C_SEP    := "565759"    ; 左右分栏线
-C_KEYBG  := "2A2F3C"    ; 键帽底
-C_KEYBD  := "8B816F"    ; 键帽边
-C_DESC   := "C9CDD8"    ; 热键说明文字
-C_EXITBD := "837B6C"    ; 退出按钮描边
-C_EXITHV := "4B4D54"    ; 退出按钮悬停底
-C_XFG    := "8D94A5"    ; 关闭按钮
-C_XHV    := "3A4152"    ; 关闭按钮悬停底
+; ==================== 茜特菈莉·星夜配色 (第72号风格) ====================
+C_WINBG  := "1D1B30"    ; 窗口底·星夜蓝紫
+C_TBAR   := "161428"    ; 标题栏·更深星夜
+C_ACC    := "7ED8E8"    ; 星霜青(标题/分类/延长线/悬停填充/退出描边)
+C_FG     := "E6E9F4"    ; 主文字·淡星白
+C_INK    := "12202A"    ; 悬停后的深色文字
+C_BTNBG  := "2B2848"    ; 按钮底
+C_BTNBD  := "4E4A78"    ; 按钮细边·星紫
+C_SEP    := "2E2B4E"    ; 左右分栏线
+C_KEYBG  := "0A0913"    ; 键帽底·黑曜
+C_KEYBD  := "8D7747"    ; 键帽描边·暗星金
+C_KEY    := "E8C25A"    ; 星金(键帽文字)
+C_DESC   := "B4B6C3"    ; 热键说明文字
+C_EXITBD := "528395"    ; 退出按钮描边(星青半透)
+C_EXITHV := "2B374C"    ; 退出按钮悬停底(星青淡填充)
+C_XFG    := "888998"    ; 关闭按钮
+C_XHV    := "2A2750"    ; 关闭按钮悬停底
 
 ; ==================== 布局尺寸 ====================
 WIN_W   := 860
@@ -106,9 +106,9 @@ myGui.MarginY := 0
 
 ; -------- 标题栏(无边框窗口自绘; 按住标题栏/空白处可拖动) --------
 myGui.Add("Text", "x0 y0 w" WIN_W " h" TITLE_H " Background" C_TBAR)
-myGui.SetFont("s12 w700 c" C_GOLD, "Microsoft YaHei")
+myGui.SetFont("s12 w700 c" C_ACC, "Microsoft YaHei")
 myGui.Add("Text", "x16 y0 w240 h" TITLE_H " +0x200 Background" C_TBAR, "◆ 原神锄地启动器")
-closeBtn := MakeBtn(myGui, WIN_W - 38, 7, 26, 26, 8, "✕", "s11", C_TBAR, C_XFG, C_XHV, C_CREAM)
+closeBtn := MakeBtn(myGui, WIN_W - 38, 7, 26, 26, 6, "✕", "s11", C_TBAR, C_XFG, C_XHV, C_FG)
 closeBtn.OnEvent("Click", (*) => ExitApp())
 
 ; -------- 左栏: 分类标题 + 路线按钮 --------
@@ -117,19 +117,19 @@ for _, catName in catOrder {
     routes := categories[catName]
 
     ; 分类标题: ◆ 名称 ──── (WS_CLIPCHILDREN下父窗口不画控件底色, 文字控件用同色实底代替透明)
-    myGui.SetFont("s7 c" C_GOLD, "Microsoft YaHei")
+    myGui.SetFont("s7 c" C_ACC, "Microsoft YaHei")
     myGui.Add("Text", "x" PAD " y" yPos " w14 h22 +0x200 Background" C_WINBG, "◆")
-    myGui.SetFont("s11 w700 c" C_GOLD, "Microsoft YaHei")
+    myGui.SetFont("s11 w700 c" C_ACC, "Microsoft YaHei")
     nameW := StrLen(catName) * 15 + 10
     myGui.Add("Text", "x" (PAD + 16) " y" yPos " w" nameW " h22 +0x200 Background" C_WINBG, catName)
     lineX := PAD + 16 + nameW
-    myGui.Add("Text", "x" lineX " y" (yPos + 11) " w" (SEP_X - PAD - lineX) " h1 Background" C_LINE)
+    AddFadeLine(myGui, lineX, yPos + 11, SEP_X - PAD - lineX, C_ACC, C_WINBG)   ; 星青渐隐延长线
     yPos += 30
 
     xPos := PAD
     col := 0
     for _, route in routes {
-        btn := MakeBtn(myGui, xPos, yPos, BTN_W, BTN_H, 12, route[1], "s12 w600", C_BTNBG, C_CREAM, C_CREAM, C_INK, C_BTNBD)
+        btn := MakeBtn(myGui, xPos, yPos, BTN_W, BTN_H, 8, route[1], "s12 w600", C_BTNBG, C_FG, C_ACC, C_INK, C_BTNBD)
         btn.OnEvent("Click", LaunchRoute.Bind(route[2]))
         col++
         if (col >= 3) {
@@ -147,13 +147,13 @@ for _, catName in catOrder {
 
 ; -------- 退出按钮(胶囊形) --------
 yPos += 8
-exitBtn := MakeBtn(myGui, PAD, yPos, LEFT_W, 36, 36, "退　出", "s11 w600", C_WINBG, C_GOLD, C_EXITHV, C_GOLD, C_EXITBD)
+exitBtn := MakeBtn(myGui, PAD, yPos, LEFT_W, 36, 36, "退　出", "s11 w600", C_WINBG, C_ACC, C_EXITHV, C_ACC, C_EXITBD)
 exitBtn.OnEvent("Click", (*) => ExitApp())
 winH := yPos + 36 + 20
 
 ; -------- 右栏: 热键功能(键帽样式) --------
 myGui.Add("Text", "x" SEP_X " y" TITLE_H " w1 h" (winH - TITLE_H) " Background" C_SEP)
-myGui.SetFont("s11 w700 c" C_GOLD, "Microsoft YaHei")
+myGui.SetFont("s11 w700 c" C_ACC, "Microsoft YaHei")
 myGui.Add("Text", "x" (SEP_X + 19) " y" (TITLE_H + 16) " w200 h22 +0x200 Background" C_WINBG, "◆ 热键功能")
 
 ; [键名, 说明, 键帽宽, 说明行数]  ; "#SEC"=分组小标题
@@ -175,22 +175,22 @@ hkY := TITLE_H + 52
 for _, hk in hotkeys {
     if (hk[1] = "#SEC") {   ; 分组小标题: ◆ 名称 ────
         hkY += 6
-        myGui.SetFont("s7 c" C_GOLD, "Microsoft YaHei")
+        myGui.SetFont("s7 c" C_ACC, "Microsoft YaHei")
         myGui.Add("Text", "x" (SEP_X + 18) " y" hkY " w12 h20 +0x200 Background" C_WINBG, "◆")
-        myGui.SetFont("s10 w700 c" C_GOLD, "Microsoft YaHei")
+        myGui.SetFont("s10 w700 c" C_ACC, "Microsoft YaHei")
         secW := StrLen(hk[2]) * 15 + 6
         myGui.Add("Text", "x" (SEP_X + 32) " y" hkY " w" secW " h20 +0x200 Background" C_WINBG, hk[2])
         secLineX := SEP_X + 32 + secW
-        myGui.Add("Text", "x" secLineX " y" (hkY + 10) " w" (WIN_W - PAD - secLineX) " h1 Background" C_LINE)
+        AddFadeLine(myGui, secLineX, hkY + 10, WIN_W - PAD - secLineX, C_ACC, C_WINBG)
         hkY += 30
         continue
     }
     keyW := hk[3]
     kbd := myGui.Add("Text", "x" (SEP_X + 18) " y" (hkY - 1) " w" (keyW + 2) " h26 +0x4000000 Background" C_KEYBD)
-    RoundCtrl(kbd, keyW + 2, 26, 12)
+    RoundCtrl(kbd, keyW + 2, 26, 6)
     key := myGui.Add("Text", "x" (SEP_X + 19) " y" hkY " w" keyW " h24 Center +0x200 +0x4000000 Background" C_KEYBG, hk[1])
-    key.SetFont("s10 c" C_GOLD, "Consolas")
-    RoundCtrl(key, keyW, 24, 10)
+    key.SetFont("s10 c" C_KEY, "Consolas")
+    RoundCtrl(key, keyW, 24, 5)
     RaiseCtrl(key)   ; 提到键帽边框层之上
     myGui.SetFont("s10 c" C_DESC, "Microsoft YaHei")
     descX := SEP_X + 19 + keyW + 12
@@ -204,9 +204,9 @@ OnMessage(0x2A3, OnMouseLeave)   ; WM_MOUSELEAVE
 OnMessage(0x201, OnLButtonDown)  ; WM_LBUTTONDOWN
 OnMessage(0x20, OnSetCursor)     ; WM_SETCURSOR
 
-; Win11: 窗口圆角 + 淡金描边
+; Win11: 窗口圆角 + 星霜青描边 (COLORREF=0x00BBGGRR, 对应 #7ED8E8)
 DllCall("dwmapi\DwmSetWindowAttribute", "ptr", myGui.Hwnd, "uint", 33, "int*", 2, "uint", 4)
-DllCall("dwmapi\DwmSetWindowAttribute", "ptr", myGui.Hwnd, "uint", 34, "uint*", 0x6F818B, "uint", 4)
+DllCall("dwmapi\DwmSetWindowAttribute", "ptr", myGui.Hwnd, "uint", 34, "uint*", 0xE8D87E, "uint", 4)
 
 myGui.Show("w" WIN_W " h" winH " NoActivate")
 HoldAlt()   ; 界面显示后按住Alt，让原神大世界露出鼠标，方便点按钮
@@ -245,6 +245,22 @@ RaiseCtrl(ctrl) {
 ; 所以AHK的ctrl.Redraw()(走父窗口)不会真正重画控件, 必须对控件窗口本身发RedrawWindow
 RepaintCtrl(ctrl) {
     DllCall("RedrawWindow", "ptr", ctrl.Hwnd, "ptr", 0, "ptr", 0, "uint", 0x105)   ; RDW_INVALIDATE|RDW_ERASE|RDW_UPDATENOW
+}
+
+; 渐隐分隔线: AHK画不了渐变, 用16段短条拼接、逐段把accent色向背景色混合来模拟
+; 起点=accent 45%不透明度叠在背景上, 终点=完全融入背景 (对应CSS linear-gradient(90deg, accent45%, transparent))
+AddFadeLine(guiObj, x, y, w, accHex, bgHex) {
+    segN := 16
+    ar := Integer("0x" SubStr(accHex, 1, 2)), ag := Integer("0x" SubStr(accHex, 3, 2)), ab := Integer("0x" SubStr(accHex, 5, 2))
+    br := Integer("0x" SubStr(bgHex, 1, 2)),  bgc := Integer("0x" SubStr(bgHex, 3, 2)), bb := Integer("0x" SubStr(bgHex, 5, 2))
+    loop segN {
+        t := (A_Index - 0.5) / segN          ; 该段中点的渐变进度 0→1
+        a := 0.45 * (1 - t)                   ; accent不透明度 45%→0
+        col := Format("{:02X}{:02X}{:02X}", Round(ar * a + br * (1 - a)), Round(ag * a + bgc * (1 - a)), Round(ab * a + bb * (1 - a)))
+        sx := x + Round((A_Index - 1) * w / segN)
+        sw := x + Round(A_Index * w / segN) - sx
+        guiObj.Add("Text", "x" sx " y" y " w" sw " h1 Background" col)
+    }
 }
 
 ; ==================== 鼠标消息处理 ====================
