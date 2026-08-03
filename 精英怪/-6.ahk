@@ -166,24 +166,14 @@ $Tab:: {
         }
         else if (pointIndex == 6) {
             Sleep(360)
-            MouseMove(2455, 641, 0)
-            Click()
-            Sleep(32)
-            MouseMove(2300, 1500, 0)
-            Click()
-
-            Sleep(50)
-            MouseMove(1300, 1050, 0)
-            Click()
-            Sleep(32)
-            MouseMove(2455, 641, 0)
-            Click()
-            Sleep(580)
-            MouseMove(1830, 1135, 0)
-            Click()
-            Sleep(20)
-            MouseMove(2300, 1500, 0)
-            Click()
+            MouseMove_Click_Sleep(2455, 641, 20)
+            Loop 3 {
+                Send "f"
+                Sleep(30)
+            }
+            Sleep(470)
+            MouseMove_Click_Sleep(1809, 1141, 20)
+            MouseMove_Click_Sleep(2300, 1500)
         }
         else if (pointIndex == 7) {
             Sleep(280)

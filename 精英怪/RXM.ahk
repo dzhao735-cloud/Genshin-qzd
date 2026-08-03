@@ -19,18 +19,13 @@ $Tab:: {
                 Click()
                 Sleep(32)
             }
-            MouseMove(1002, 506, 0)
-            Click()
-            Sleep(80)
-            MouseMove(2300, 1500, 0)
-            Click()
-
-            Sleep(80)
-            MouseMove(1002, 506, 0)
-            Click()
-            Sleep(80)
-            MouseMove(2300, 1500, 0)
-            Click()
+            MouseMove_Click_Sleep(1002, 506, 80)
+            Send "f"
+            Sleep(40)
+            Send "f"
+            Sleep(460)
+            MouseMove_Click_Sleep(1809, 1141, 90)
+            MouseMove_Click_Sleep(2300, 1500)
         }
         else if (pointIndex == 2) {
             Sleep(280)
