@@ -30,6 +30,48 @@ OpenMapQuick(pointIndexValue, sleepTime := 120, pointsString := ",1,") {
     Send "m"
 }
 
+ClickRegion(region, sleeptime) {
+    MouseMove_Click_Sleep(2300, 1500, 20)
+    Switch region {
+    Case 1:         ;蒙德
+        MouseMove_Click_Sleep(1925, 238, sleeptime)
+    Case 2:         ;璃月
+        MouseMove_Click_Sleep(2333, 242, sleeptime)
+    Case 3:         ;稻妻
+        MouseMove_Click_Sleep(1929, 380, sleeptime)
+    Case 4:         ;须弥
+        MouseMove_Click_Sleep(2337, 376, sleeptime)
+    Case 5:         ;枫丹
+        MouseMove_Click_Sleep(1931, 512, sleeptime)
+    Case 6:         ;纳塔
+        MouseMove_Click_Sleep(2328, 512, sleeptime)
+    Case 7:         ;挪德卡莱
+        MouseMove_Click_Sleep(1929, 651, sleeptime)
+    Case 8:         ;至东
+        MouseMove_Click_Sleep(2333, 651, sleeptime)
+    Case 9:         ;未知xxxx
+        return
+
+    Case 100:       ;渊下宫
+        MouseMove_Click_Sleep(1924, 811, sleeptime)
+    Case 101:       ;层岩巨渊
+        MouseMove_Click_Sleep(2322, 812, sleeptime)
+    Case 102:       ;旧日之海
+        MouseMove_Click_Sleep(1926, 947, sleeptime)
+    Case 103:       ;远古圣山
+        MouseMove_Click_Sleep(2320, 952, sleeptime)
+    Case 104:       ;空之神殿
+        MouseMove_Click_Sleep(1921, 1087, sleeptime)
+    Case 105:       ;霜月
+        MouseMove_Click_Sleep(2336, 1090, sleeptime)
+    Case 106:       ;未知xxxx
+        return
+
+    Default:
+        return
+    }
+}
+
 SendInputDrag(xS, yS, xE, yE, maxDeltaPerStep := 50) {
     MouseMove(xS, yS, 0)
     Sleep(32)
