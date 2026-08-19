@@ -12,7 +12,7 @@ $Tab:: {
     busy := true
     BlockInput(true)
     try {
-        OpenMapQuick(pointIndex, ,",1,21,25,")
+        OpenMapQuick(pointIndex, ,",1,22,26,")
         if (pointIndex == 1) {
             Sleep(360)
             MapMinimize()
@@ -171,11 +171,18 @@ $Tab:: {
         else if (pointIndex == 18) {
             Sleep(300)
             loop 2 {
-                MouseMove_Click_Sleep(1549, 856, 20)
+                MouseMove_Click_Sleep(1473, 960, 8)
                 MouseMove_Click_Sleep(2300, 1500, 50)
             }
         }
         else if (pointIndex == 19) {
+            Sleep(300)
+            loop 2 {
+                MouseMove_Click_Sleep(1702, 790, 60)
+                MouseMove_Click_Sleep(2300, 1500, 50)
+            }
+        }
+        else if (pointIndex == 20) {
             Sleep(340)
             ClickRegion(8, 150)
             loop 2 {
@@ -185,7 +192,7 @@ $Tab:: {
                 MouseMove_Click_Sleep(1538, 1182, 50)
             }
         }
-        else if (pointIndex == 20) {
+        else if (pointIndex == 21) {
             Sleep(340)
             MouseMove(2300, 1500, 0)
             Click()
@@ -214,59 +221,30 @@ $Tab:: {
             MouseMove(2300, 1500, 0)
             Click()
         }
-        else if (pointIndex == 21) {
-            Sleep(250)
-            MouseMove(1254, 1061, 0)
-            Click()
-            Sleep(20)
-            MouseMove(2300, 1500, 0)
-            Click()
-
-            Sleep(50)
-            MouseMove(1254, 1061, 0)
-            Click()
-            Sleep(20)
-            MouseMove(2300, 1500, 0)
-            Click()
-
-            Sleep(50)
-            MouseMove(1254, 1061, 0)
-            Click()
-            Sleep(20)
-            MouseMove(2300, 1500, 0)
-            Click()
-
-            Sleep(100)
-            MouseMove(1254, 1061, 0)
-            Click()
-            Sleep(20)
-            MouseMove(2300, 1500, 0)
-            Click()
-        }
         else if (pointIndex == 22) {
             Sleep(250)
-            MouseMove(1379, 1141, 0)
+            MouseMove(1254, 1061, 0)
             Click()
             Sleep(20)
             MouseMove(2300, 1500, 0)
             Click()
 
             Sleep(50)
-            MouseMove(1379, 1141, 0)
+            MouseMove(1254, 1061, 0)
             Click()
             Sleep(20)
             MouseMove(2300, 1500, 0)
             Click()
 
             Sleep(50)
-            MouseMove(1379, 1141, 0)
+            MouseMove(1254, 1061, 0)
             Click()
             Sleep(20)
             MouseMove(2300, 1500, 0)
             Click()
 
             Sleep(100)
-            MouseMove(1379, 1141, 0)
+            MouseMove(1254, 1061, 0)
             Click()
             Sleep(20)
             MouseMove(2300, 1500, 0)
@@ -274,6 +252,35 @@ $Tab:: {
         }
         else if (pointIndex == 23) {
             Sleep(250)
+            MouseMove(1379, 1141, 0)
+            Click()
+            Sleep(20)
+            MouseMove(2300, 1500, 0)
+            Click()
+
+            Sleep(50)
+            MouseMove(1379, 1141, 0)
+            Click()
+            Sleep(20)
+            MouseMove(2300, 1500, 0)
+            Click()
+
+            Sleep(50)
+            MouseMove(1379, 1141, 0)
+            Click()
+            Sleep(20)
+            MouseMove(2300, 1500, 0)
+            Click()
+
+            Sleep(100)
+            MouseMove(1379, 1141, 0)
+            Click()
+            Sleep(20)
+            MouseMove(2300, 1500, 0)
+            Click()
+        }
+        else if (pointIndex == 24) {
+            Sleep(250)
             MouseMove(1684, 899, 0)
             Click()
             Sleep(20)
@@ -301,7 +308,7 @@ $Tab:: {
             MouseMove(2300, 1500, 0)
             Click()
         }
-        else if (pointIndex == 24) {
+        else if (pointIndex == 25) {
             Sleep(330)
             MouseMove(2300, 1500, 0)
             Click()
@@ -329,7 +336,7 @@ $Tab:: {
             MouseMove(2300, 1500, 0)
             Click()
         }
-        else if (pointIndex == 25) {
+        else if (pointIndex == 26) {
             Sleep(250)
             MouseMove(2119, 891, 0)
             Click()
@@ -370,7 +377,7 @@ $Tab:: {
             MouseMove(2300, 1500, 0)
             Click()
         }
-        else if (pointIndex == 26) {
+        else if (pointIndex == 27) {
             Sleep(250)
             MouseMove(1384, 1031, 0)
             Click()
@@ -399,7 +406,7 @@ $Tab:: {
             MouseMove(2300, 1500, 0)
             Click()
         }
-        else if (pointIndex == 27) {
+        else if (pointIndex == 28) {
             Sleep(250)
             MouseMove(725, 1364, 0)
             Click()

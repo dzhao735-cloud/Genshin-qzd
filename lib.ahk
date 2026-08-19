@@ -105,26 +105,30 @@ ShowToast(msg, duration := 2000) {
     SetTimer(() => (g.Destroy(), g := ""), -duration)
 }
 
-MapMinimize(sleepTime := 24){
-    MouseMove(61, 670, 0)
-    Sleep(sleepTime - 4)
-    Click("Down")
-    Sleep(sleepTime)
-    MouseMove(61, 630, 0)
-    Sleep(sleepTime)
-    Click("Up")
-    Sleep(sleepTime)
+MapMinimize(sleepTime := 16){
+    loop 2 {
+        MouseMove(61, 670, 0)
+        Sleep(sleepTime - 2)
+        Click("Down")
+        Sleep(sleepTime)
+        MouseMove(61, 630, 0)
+        Sleep(sleepTime)
+        Click("Up")
+        Sleep(sleepTime)
+    }
 }
 
-MapMaximize(sleepTime := 24){
-    MouseMove(61, 927, 0)
-    Sleep(sleepTime - 4)
-    Click("Down")
-    Sleep(sleepTime)
-    MouseMove(61, 967, 0)
-    Sleep(sleepTime)
-    Click("Up")
-    Sleep(sleepTime)
+MapMaximize(sleepTime := 16){
+    loop 2 {
+        MouseMove(61, 927, 0)
+        Sleep(sleepTime - 2)
+        Click("Down")
+        Sleep(sleepTime)
+        MouseMove(61, 967, 0)
+        Sleep(sleepTime)
+        Click("Up")
+        Sleep(sleepTime)
+    }
 }
 
 ButtonsUp(){
