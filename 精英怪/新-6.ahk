@@ -171,14 +171,14 @@ $Tab:: {
         else if (pointIndex == 18) {
             Sleep(300)
             loop 2 {
-                MouseMove_Click_Sleep(1473, 960, 8)
+                MouseMove_Click_Sleep(1473, 960, 20)
                 MouseMove_Click_Sleep(2300, 1500, 50)
             }
         }
         else if (pointIndex == 19) {
             Sleep(300)
             loop 2 {
-                MouseMove_Click_Sleep(1702, 790, 60)
+                MouseMove_Click_Sleep(1702, 790, 20)
                 MouseMove_Click_Sleep(2300, 1500, 50)
             }
         }
