@@ -84,11 +84,11 @@ SendInputDrag(xS, yS, xE, yE, maxDeltaPerStep := 50) {
         curX := Round(xS + totalDX * A_Index / steps)
         curY := Round(yS + totalDY * A_Index / steps)
         MouseMove(curX, curY, 0)
-        Sleep(32)
+        Sleep(24)
     }
-    Sleep(32)
+    Sleep(60)
     SendInput("{LButton Up}")
-    Sleep(32)
+    Sleep(20)
 }
 
 ShowToast(msg, duration := 2000) {
