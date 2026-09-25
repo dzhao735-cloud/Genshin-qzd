@@ -84,9 +84,9 @@ SendInputDrag(xS, yS, xE, yE, maxDeltaPerStep := 50) {
         curX := Round(xS + totalDX * A_Index / steps)
         curY := Round(yS + totalDY * A_Index / steps)
         MouseMove(curX, curY, 0)
-        Sleep(24)
+        Sleep(20)
     }
-    Sleep(60)
+    Sleep(70)
     SendInput("{LButton Up}")
     Sleep(20)
 }
@@ -200,127 +200,127 @@ $F12:: {
 }
 
 ;我的号 夜兰吃的药
-$-:: {
-    static busy := false
-    if busy
-        return
-    busy := true
+; $-:: {
+;     static busy := false
+;     if busy
+;         return
+;     busy := true
     
-    BlockInput(true)
-    try {
-        Send "b"
-        ShowToast("✦ 正在吃 夜兰 的药(乆刄)", 1300)
-        Sleep(780)
-        MouseMove(1150, 68, 0)
-        Click()
-        Sleep(330)
-        MouseMove(1200, 730, 0) ;第1个药的位置
-        Click()
-        Sleep(32)
-        MouseMove(2218, 1500, 0)
-        Click()
-        Sleep(20)
-        MouseMove(430, 1000, 0) ;第2个药的位置
-        Click()
-        Sleep(32)
-        MouseMove(2218, 1500, 0)
-        Click()
-        Sleep(20)
-        MouseMove(600, 1200, 0) ;第3个药的位置
-        Click()
-        Sleep(32)
-        MouseMove(2218, 1500, 0)
-        Click()
-        Sleep(20)
-        MouseMove(824, 494, 0) ;第4个药的位置
-        Click()
-        Sleep(32)
-        MouseMove(2218, 1500, 0)
-        Click()
-        Sleep(20)
-        Send "{Esc}"
-    } finally {
-        BlockInput(false)
-    }
-    KeyWait "-"
-    busy := false
-}
+;     BlockInput(true)
+;     try {
+;         Send "b"
+;         ShowToast("✦ 正在吃 夜兰 的药(乆刄)", 1300)
+;         Sleep(780)
+;         MouseMove(1150, 68, 0)
+;         Click()
+;         Sleep(330)
+;         MouseMove(1200, 730, 0) ;第1个药的位置
+;         Click()
+;         Sleep(32)
+;         MouseMove(2218, 1500, 0)
+;         Click()
+;         Sleep(20)
+;         MouseMove(430, 1000, 0) ;第2个药的位置
+;         Click()
+;         Sleep(32)
+;         MouseMove(2218, 1500, 0)
+;         Click()
+;         Sleep(20)
+;         MouseMove(600, 1200, 0) ;第3个药的位置
+;         Click()
+;         Sleep(32)
+;         MouseMove(2218, 1500, 0)
+;         Click()
+;         Sleep(20)
+;         MouseMove(824, 494, 0) ;第4个药的位置
+;         Click()
+;         Sleep(32)
+;         MouseMove(2218, 1500, 0)
+;         Click()
+;         Sleep(20)
+;         Send "{Esc}"
+;     } finally {
+;         BlockInput(false)
+;     }
+;     KeyWait "-"
+;     busy := false
+; }
 
 ;我的号 火神吃的药
-$=:: {
-    static busy := false
-    if busy
-        return
-    busy := true
+; $=:: {
+;     static busy := false
+;     if busy
+;         return
+;     busy := true
     
-    BlockInput(true)
-    try {
-        Send "b"
-        ShowToast("✦ 正在吃 火神 的药(乆刄)", 1200)
-        Sleep(780)
-        MouseMove(1150, 68, 0)
-        Click()
-        Sleep(330)
+;     BlockInput(true)
+;     try {
+;         Send "b"
+;         ShowToast("✦ 正在吃 火神 的药(乆刄)", 1200)
+;         Sleep(780)
+;         MouseMove(1150, 68, 0)
+;         Click()
+;         Sleep(330)
         
-        MouseMove(240, 730, 0) ;第1个药的位置
-        Click()
-        Sleep(32)
-        MouseMove(2218, 1500, 0)
-        Click()
-        Sleep(20)
+;         MouseMove(240, 730, 0) ;第1个药的位置
+;         Click()
+;         Sleep(32)
+;         MouseMove(2218, 1500, 0)
+;         Click()
+;         Sleep(20)
         
-        MouseMove(432, 1188, 0) ;第2个药的位置
-        Click()
-        Sleep(32)
-        MouseMove(2218, 1500, 0)
-        Click()
-        Sleep(20)
+;         MouseMove(432, 1188, 0) ;第2个药的位置
+;         Click()
+;         Sleep(32)
+;         MouseMove(2218, 1500, 0)
+;         Click()
+;         Sleep(20)
         
-        Send "{Esc}"
-    } finally {
-        BlockInput(false)
-    }
-    KeyWait "="
-    busy := false
-}
+;         Send "{Esc}"
+;     } finally {
+;         BlockInput(false)
+;     }
+;     KeyWait "="
+;     busy := false
+; }
 
 ;小美的号 恰吃的药
-$F10:: {
-    static busy := false
-    if busy
-        return
-    busy := true
+; $F10:: {
+;     static busy := false
+;     if busy
+;         return
+;     busy := true
     
-    BlockInput(true)
-    try {
-        Send "b"
-        ShowToast("✦ 正在吃 恰 的药(小美)", 1200)
-        Sleep(780)
-        MouseMove(1150, 68, 0)
-        Click()
-        Sleep(330)
+;     BlockInput(true)
+;     try {
+;         Send "b"
+;         ShowToast("✦ 正在吃 恰 的药(小美)", 1200)
+;         Sleep(780)
+;         MouseMove(1150, 68, 0)
+;         Click()
+;         Sleep(330)
         
-        MouseMove(433, 281, 0) ;第1个药的位置
-        Click()
-        Sleep(32)
-        MouseMove(2218, 1500, 0)
-        Click()
-        Sleep(20)
+;         MouseMove(433, 281, 0) ;第1个药的位置
+;         Click()
+;         Sleep(32)
+;         MouseMove(2218, 1500, 0)
+;         Click()
+;         Sleep(20)
         
-        MouseMove(637, 300, 0) ;第2个药的位置
-        Click()
-        Sleep(32)
-        MouseMove(2218, 1500, 0)
-        Click()
-        Sleep(20)
+;         MouseMove(637, 300, 0) ;第2个药的位置
+;         Click()
+;         Sleep(32)
+;         MouseMove(2218, 1500, 0)
+;         Click()
+;         Sleep(20)
         
-        Send "{Esc}"
-    } finally {
-        BlockInput(false)
-    }
-    KeyWait "F10"
-    busy := false
-}
+;         Send "{Esc}"
+;     } finally {
+;         BlockInput(false)
+;     }
+;     KeyWait "F10"
+;     busy := false
+; }
 
 global pointIndex := 1
 global maxPoints := 1

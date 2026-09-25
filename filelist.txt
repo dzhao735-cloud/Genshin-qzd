@@ -7,7 +7,7 @@ Main.ahk
 小怪/船员.ahk
 狗粮路线/狗粮路线A.ahk
 狗粮路线/狗粮路线B.ahk
-精英怪/新-6.ahk
+精英怪/-6.ahk
 精英怪/KSY.ahk
 精英怪/RXM.ahk
 精英怪/使徒.ahk

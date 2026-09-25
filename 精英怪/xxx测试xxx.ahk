@@ -1,6 +1,11 @@
 #Include "..\lib.ahk"
 #Include "..\检测圣遗物\圣遗物拾取模块.ahk"
 
+;延迟：
+;正常点 330
+;clickregion 370
+;开头，拖动和可能出现地脉都是 390
+;
 maxPoints := 28
 AP_Start()
 #HotIf WinActive("ahk_class UnityWndClass")
